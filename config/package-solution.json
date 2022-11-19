@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "portfolio-profiles-client-side-solution",
+    "id": "7de6f1e2-47b7-4b5b-a0d6-b9e1faac5d11",
+    "version": "1.3.2.7",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.15.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "portfolio-profiles description"
+      },
+      "longDescription": {
+        "default": "portfolio-profiles description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "portfolio-profiles Feature",
+        "description": "The feature that activates elements of the portfolio-profiles solution.",
+        "id": "496909c3-83cb-4606-9f08-8506a91291a3",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/portfolio-profiles.sppkg"
+  }
+}

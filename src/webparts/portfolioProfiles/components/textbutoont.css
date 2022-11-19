@@ -1,0 +1,30 @@
+
+.button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
+  .btnHi{
+    height: "33px"
+  }
+  .input{
+    height:'21px';
+    font-size:'11pt'
+  }
+  .rmunderline{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    padding: 5px;
+    height: 28px;
+    border-bottom: 1px solid rgb(187, 187, 187);
+  }
+  .menu {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
