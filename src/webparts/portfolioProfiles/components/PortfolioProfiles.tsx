@@ -14,6 +14,24 @@ import SmartFilter from './PortfolioProfile/SmartFilter';
 import Groupby from './GroupBy';
 export default class PortfolioProfiles extends React.Component<IPortfolioProfilesProps, {}> {
   public render(): React.ReactElement<IPortfolioProfilesProps> {
+
+
+  function getQueryVariable(variable:any)
+  {
+          var query = window.location.search.substring(1);
+          console.log(query)//"app=article&act=news_content&aid=160990"
+          var vars = query.split("&");
+          console.log(vars) //[ 'app=article', 'act=news_content', 'aid=160990' ]
+          for (var i=0;i<vars.length;i++) {
+                      var pair = vars[i].split("=");
+                      console.log(pair)//[ 'app', 'article' ][ 'act', 'news_content' ][ 'aid', '160990' ] 
+          if(pair[0] == variable){return pair[1];}
+           }
+           return(false);
+           
+  }
+  
+
     return (
       <div>     
          {/* <h1>Portfolio Profile</h1> */}
@@ -24,7 +42,7 @@ export default class PortfolioProfiles extends React.Component<IPortfolioProfile
         {/* <PopupOfdata/> */}
         {/* <MyTable/> */}
         {/* <Portfoliop/> */}
-        <Portfolio ID={325}/>
+        <Portfolio ID={getQueryVariable('taskId')}/>
          
        
         {/* <DatasubComp/> */}

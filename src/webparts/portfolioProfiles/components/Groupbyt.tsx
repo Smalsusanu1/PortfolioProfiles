@@ -131,7 +131,7 @@ function Groupby(props:any) {
     const handleOpen = (item: any) => {
 
         item.show = item.show = item.show == true ? false : true;
-        setData(data => ([...maidataBackup]));
+        setData(data => ([...data]));
 
 
     };
@@ -518,12 +518,13 @@ function Groupby(props:any) {
                     //maidataBackup.push(ComponentsData)
                     setmaidataBackup(ComponentsData)
                     console.log(maidataBackup);
-                    // setData(ComponentsData);
-                    // if(props.level>325){ }else{
-                    //     Components.push(ComponentsData[props.level-3])
-                    //  }
-                    Components.push(ComponentsData[props.level-1])
-                    
+                    setData(ComponentsData);
+
+
+
+                  const level = props.level;
+                    Components.push(ComponentsData[level-1])
+                   
                     setData(Components);
                     console.log(Components);
 

@@ -6,7 +6,8 @@ import './styles.css';
 import * as Moment from 'moment';
 import Tooltip from '../../popup';
 import Groupbyt from '../../Groupbyt';
-// import Groupby from '../../GroupBywe';
+// import Groupby from '../../GroupBys';
+import Groupby from '../../GroupBywe';
 // import Tooltip from '../popup';
 // import Groupbyt from '../Groupbyt';
 // import PopupOfdata from '../PopupOfdata';
@@ -776,6 +777,9 @@ function Portfolio({ID}:any) {
                             <div className="container">
                             {data.map(item => (
                                 <Groupbyt  title={item.Title} level={item.PortfolioLevel}/>))}
+                                {/* {data.map(item => (
+                                <Groupby title={item.Title} level={item.PortfolioLevel}/>
+                                ))} */}
                             </div>
 
                         </section>
