@@ -12,14 +12,7 @@ import { MdAdd } from 'react-icons/Md';
 import { map } from 'jquery';
 import { concat } from 'lodash';
 import Tooltip from './popup';
-
-
-
-
-
-
-function Groupby(props:any) {
-
+function Groupby(props: any) {
     const [maiArrayBackup, setmaiArrayBackup] = React.useState([])
     const [maidataBackup, setmaidataBackup] = React.useState([])
     const [show, setShow] = React.useState(false);
@@ -45,17 +38,11 @@ function Groupby(props:any) {
     const [Editdata, setEditdata] = React.useState([]);
     const [AllMetadata, setMetadata] = React.useState([])
     const [AllTimeSheetDataNew, setTimeSheet] = React.useState([])
-
-
-
-
     //--------------SmartFiltrt--------------------------------------------------------------------------------------------------------------------------------------------------
-
     const SingleLookDatatest = (e: any, item: any, value: any) => {
         const { checked } = e.target;
         if (checked) {
             state.push(item);
-
         }
         else {
             $.each(state, function (index: any, newite: any) {
@@ -74,7 +61,6 @@ function Groupby(props:any) {
         // setData(maini...[maidataBackup])
         setData(maidataBackup)
         // const { checked } = e.target;
-
     }
     const Updateitem = () => {
         var filters: any[] = []
@@ -83,63 +69,38 @@ function Groupby(props:any) {
         }
         else {
             $.each(maidataBackup, function (index: any, item) {
-
                 $.each(state, function (index: any, select) {
                     if (item.Id == select.Id) {
                         filters.push(item);
                     }
                     $.each(item.TeamLeaderUser, function (index: any, team) {
                         if (select.Title == team.Title) {
-
                             filters.push(item);
                         }
-
                     })
                     $.each(item.Child, function (index: any, childitem) {
                         if (childitem.Id == select.Id) {
                             filters.push(childitem);
                         }
-
                     })
                     $.each(item.Child.TeamLeaderUser, function (index: any, childteam) {
                         if (select.Title == childteam.Title) {
-
                             filters.push(childteam);
                         }
-
                     })
-
                 })
-
-
-
-
-
             })
         }
-
         setData(filters)
-
-
     }
-
-
-
     const handleOpen2 = (item: any) => {
-
         item.show = item.show = item.show == true ? false : true;
         setfilterItems(filterItems => ([...filterItems]));
-
-
     };
     const handleOpen = (item: any) => {
-
         item.show = item.show = item.show == true ? false : true;
         setData(data => ([...data]));
-
     };
-
-
     const addModal = () => {
         setAddModalOpen(true)
     }
@@ -149,25 +110,15 @@ function Groupby(props:any) {
     const setModalIsTimeOpenToTrue = () => {
         setTimeModalIsOpen(true)
     }
-
-
     const sortBy = () => {
-
         const copy = data
-
         copy.sort((a, b) => (a.Title > b.Title) ? 1 : -1);
-
         setTable(copy)
-
     }
     const sortByDng = () => {
-
         const copy = data
-
         copy.sort((a, b) => (a.Title > b.Title) ? -1 : 1);
-
         setTable(copy)
-
     }
     let handleChange = (e: { target: { value: string; }; }, titleName: any) => {
         setSearch(e.target.value.toLowerCase());
@@ -185,7 +136,6 @@ function Groupby(props:any) {
         $.each(searchTerms, function (index: any, val: any) {
             if (isSearchTermAvailable && (item[Title] != undefined && item[Title].toLowerCase().indexOf(val.toLowerCase()) > -1)) {
                 isSearchTermAvailable = true;
-
             } else
                 isSearchTermAvailable = false;
         })
@@ -194,7 +144,6 @@ function Groupby(props:any) {
     let handleChange1 = (e: { target: { value: string; }; }, titleName: any) => {
         setSearch(e.target.value.toLowerCase());
         var Title = titleName;
-
         var AllFilteredTagNews = [];
         var filterglobal = e.target.value.toLowerCase();
         if (filterglobal != undefined && filterglobal.length >= 1) {
@@ -237,21 +186,18 @@ function Groupby(props:any) {
                                 }
                             })
                         }
-
                     })
                 }
             })
             //   getFilterLength();
         } else {
             //  ungetFilterLength();
-           // setData(data => ([...maidataBackup]));
-           setData(maidataBackup);
+            // setData(data => ([...maidataBackup]));
+            setData(maidataBackup);
             //setData(ComponentsData)= SharewebCommonFactoryService.ArrayCopy($scope.CopyData);
         }
         // console.log($scope.ComponetsData['allComponentItemWithStructure']);
-
     };
-
     var siteConfig: any = []
     var TaxonomyItems: any = [];
     var AllComponetsData: any = [];
@@ -259,56 +205,30 @@ function Groupby(props:any) {
     var RootComponentsData: any = [];
     var MetaData: any = []
     React.useEffect(() => {
-
-
         function RetrieveSPData() {
             //--------------------------task user--------------------------------------------------------------------------------------------------
             var Response: any = []
             var url = "https://hhhhteams.sharepoint.com/sites/HHHH/SP/_api/web/lists/getbyid('b318ba84-e21d-4876-8851-88b94b9dc300')/items?$top=1000";
-
             $.ajax({
-
                 url: url,
-
                 method: "GET",
-
                 headers: {
-
                     "Accept": "application/json; odata=verbose"
-
                 },
-
                 success: function (data) {
-
                     Response = Response.concat(data.d.results);
                     TaskUsers = Response;
                     console.log(Response);
-
                     if (data.d.__next) {
-
                         url = data.d.__next;
-
-
-
                     }
                     else setTask(Response);
-
-
                 },
-
                 error: function (error) {
-
-
                 }
-
             });
-
             //-----------------------------------end taskuser data--------------------------------------------------------------------------------------------
-
             //----------------------------------------LoadSmartMetaData---------------------------------------------------------------------------------------------------------------------------
-
-
-
             var metadatItem: any = []
             var filterItems: any = [];
             // var filterGroups: any = [];
@@ -393,8 +313,6 @@ function Groupby(props:any) {
                             if (item.Title == "Activities" || item.Title == "Workstream" || item.Title == "Task") {
                                 item.Selected = true;
                             }
-
-
                             if (filterItem.ParentID == 0 || (filterItem.Parent != undefined && filterItem.Parent.Id == undefined)) {
                                 if (item.TaxType == 'Team Members') {
                                     getChildsBasedonId(item, Response);
@@ -404,16 +322,11 @@ function Groupby(props:any) {
                                 filterItems.push(item);
                                 if (filterItem.TaxType != "Type" && filterItem.TaxType != "Sites Old" && (filterGroups.length == 0 || filterGroups.indexOf(filterItem.TaxType) == -1)) {
                                     filterGroups.push(filterItem.TaxType);
-
                                 }
-
                                 setFilterGroups(filterGroups)
-
                             }
-
                         }
                     });
-
                     filterItems.push({ "Group": "Portfolio", "TaxType": "Portfolio", "Title": "Component", "Selected": true, "childs": [] }, { "Group": "Portfolio", "TaxType": "Portfolio", "Title": "SubComponent", "Selected": true, "childs": [] }, { "Group": "Portfolio", "TaxType": "Portfolio", "Title": "Feature", "Selected": true, "childs": [] });
                     $.each(filterItems, function (neww: any, item) {
                         if (item.TaxType == "Sites" && item.Title == 'SDC Sites' || item.Title == 'Tasks') {
@@ -421,7 +334,6 @@ function Groupby(props:any) {
                         }
                     })
                     setfilterItems(filterItems)
-
                     function getChildsBasedonId(item: { childs: any[]; Id: any; }, items: any) {
                         item.childs = [];
                         $.each(items, function (child: any, childItem) {
@@ -440,69 +352,45 @@ function Groupby(props:any) {
                             }
                         });
                     }
-
                 },
-
-
                 error: function (error) {
-
-
                 }
-
             });
             //---------------------------------------End SmartMetaData-------------------------------------------------------------------------------------------------------------------------------------
-
             var spRequest = new XMLHttpRequest();
             var query = "Id,Mileage,TaskListId,TaskListName,WorkspaceType,PortfolioLevel,PortfolioStructureID,component_x0020_link,Package,Comments,DueDate,Sitestagging,Body,Deliverables,SiteCompositionSettings,StartDate,Created,Item_x0020_Type,Help_x0020_Information,Background,Categories,TechnicalExplanations,Idea,ValueAdded,Synonyms,Package,Short_x0020_Description_x0020_On,Admin_x0020_Notes,AdminStatus,CategoryItem,Priority_x0020_Rank,Priority,TaskDueDate,DueDate,PercentComplete,Modified,CompletedDate,ItemRank,Title,Portfolio_x0020_Type,Parent/Id,Parent/Title,Component/Id,Component/Title,Component/ItemType,Services/Id,Services/Title,Services/ItemType,Events/Id,Events/Title,Events/ItemType,SharewebCategories/Id,SharewebCategories/Title,AssignedTo/Id,AssignedTo/Title,Team_x0020_Members/Id,Team_x0020_Members/Title,ClientCategory/Id,ClientCategory/Title&$expand=SharewebCategories,ClientCategory,Parent,Component,Services,Events,AssignedTo,Team_x0020_Members&$filter=((Item_x0020_Type eq 'Component') or (Item_x0020_Type eq 'SubComponent') or (Item_x0020_Type eq 'Feature'))and (Portfolio_x0020_Type eq 'Service')&$top=4999";
             spRequest.open('GET', "https://hhhhteams.sharepoint.com/sites/HHHH/SP/_api/lists/getbyid('ec34b38f-0669-480a-910c-f84e92e58adf')/items?$select=" + query);
             spRequest.setRequestHeader("Accept", "application/json");
-
             spRequest.onreadystatechange = function () {
                 //  var RootComponentsData: any[] = [];
                 // var ComponentsData: any = [];
                 // var SubComponentsData: any = [];
                 // var FeatureData: any = [];
                 var maiArrayBackup: any = []
-
                 if (spRequest.readyState === 4 && spRequest.status === 200) {
                     var results = JSON.parse(spRequest.responseText);
-
                     maiArrayBackup.push(results.value)
                     setmaiArrayBackup(maiArrayBackup)
                     AllComponetsData = maiArrayBackup[0];
                     //  setData(AllComponetsData);
                     ComponetsData['allComponets'] = AllComponetsData;
-
-
-
                 }
                 else if (spRequest.readyState === 4 && spRequest.status !== 200) {
                     console.log('Error Occurred !');
                 }
-
             },
-
                 spRequest.send();
         }
-
-
         RetrieveSPData();
-
-
-
         $.each(data, function (index: any, item) {
             $.each(state, function (index: any, select) {
                 if (item.Portfolio_x0020_Type == select.Title) {
                     select.Selected = true;
-
                 }
                 if (item.Id == select.Id) {
                     select.Selected = true;
-
                 }
-
             })
-
         })
     }, [])
     // common services
@@ -554,7 +442,6 @@ function Groupby(props:any) {
             }
             if (item.SharewebTaskType.Title == 'Project')
                 Shareweb_x0020_ID = 'P' + item.SharewebTaskLevel1No;
-
         }
         else if (item.SharewebTaskType != undefined && (item.SharewebTaskType.Title == 'Workstream' || item.SharewebTaskType.Title == 'Step') && item.SharewebTaskLevel1No != undefined && item.SharewebTaskLevel2No != undefined) {
             if (item.Component != undefined && item.Services != undefined && item.Events != undefined) {
@@ -582,7 +469,6 @@ function Groupby(props:any) {
             }
             if (item.SharewebTaskType.Title == 'Step')
                 Shareweb_x0020_ID = 'P' + item.SharewebTaskLevel1No + '-S' + item.SharewebTaskLevel2No;
-
         }
         else if (item.SharewebTaskType != undefined && (item.SharewebTaskType.Title == 'Task' || item.SharewebTaskType.Title == 'MileStone') && item.SharewebTaskLevel1No != undefined && item.SharewebTaskLevel2No != undefined) {
             if (item.Component != undefined && item.Services != undefined && item.Events != undefined) {
@@ -639,7 +525,6 @@ function Groupby(props:any) {
             if (item.SharewebTaskType.Title == 'MileStone') {
                 Shareweb_x0020_ID = 'P' + item.SharewebTaskLevel1No + '-M' + item.Id;
             }
-
         }
         return Shareweb_x0020_ID;
     }
@@ -694,14 +579,12 @@ function Groupby(props:any) {
             }
         }
         var MainComponent: any = [];
-
         if (task.PortfolioItemsId != undefined) {
             MainComponent = ArrayCopy($.grep(AllComponetsData, function (index: any, type: any) { return type.Id == task.PortfolioItemsId }));
         }
         if (task.Item_x0020_Type != undefined && task.Item_x0020_Type == 'Component' || task.Item_x0020_Type == 'SubComponent' || task.Item_x0020_Type == 'Feature') {
             MainComponent = ArrayCopy($.grep(AllComponetsData, function (type: any) { return type.Id == task.Id }));
         }
-
         var OtherStructure = "";
         if (MainComponent.length > 0) {
             if (MainComponent[0].Item_x0020_Type == 'Component') {
@@ -799,8 +682,8 @@ function Groupby(props:any) {
     const findTaggedComponents = function (task: any) {
         task.Portfolio_x0020_Type = 'Component';
         task.isService = false;
-        if (pageType == 'Service-Portfolio') {
-            $.each(task['Services']['results'], function (index: any, componentItem: any) {
+        if (pageType == 'Component-Portfolio') {
+            $.each(task['Component']['results'], function (index: any, componentItem: any) {
                 for (var i = 0; i < ComponetsData['allComponets'].length; i++) {
                     let crntItem = ComponetsData['allComponets'][i];
                     if (componentItem.Id == crntItem.Id) {
@@ -808,9 +691,9 @@ function Groupby(props:any) {
                             task.PortfolioStructureID = crntItem.PortfolioStructureID;
                             task.ShowTooltipSharewebId = crntItem.PortfolioStructureID + '-' + task.Shareweb_x0020_ID;
                         }
-                        if (crntItem.Portfolio_x0020_Type == 'Service') {
+                        if (crntItem.Portfolio_x0020_Type == 'Component') {
                             task.isService = true;
-                            task.Portfolio_x0020_Type = 'Service';
+                            task.Portfolio_x0020_Type = 'Component';
                         }
                         if (ComponetsData['allComponets'][i]['childs'] == undefined)
                             ComponetsData['allComponets'][i]['childs'] = [];
@@ -822,7 +705,7 @@ function Groupby(props:any) {
             });
         }
     }
-    var pageType = 'Service-Portfolio';
+    var pageType = 'Component-Portfolio';
     var ComponetsData: any = {};
     ComponetsData.allUntaggedTasks = []
     const bindData = function () {
@@ -834,7 +717,6 @@ function Groupby(props:any) {
                 result.DueDate = result.DueDate.replaceAll("Invalid date", "")
             }
             result.PercentComplete = (result.PercentComplete * 100).toFixed(0);
-
             if (result.Short_x0020_Description_x0020_On != undefined) {
                 result.Short_x0020_Description_x0020_On = result.Short_x0020_Description_x0020_On.replace(/(<([^>]+)>)/ig, '');
             }
@@ -844,12 +726,10 @@ function Groupby(props:any) {
                 $.each(result.AssignedTo, function (index: any, Assig: any) {
                     if (Assig.Id != undefined) {
                         $.each(Response, function (index: any, users: any) {
-
                             if (Assig.Id != undefined && users.AssingedToUserId != undefined && Assig.Id == users.AssingedToUserId) {
                                 users.ItemCover = users.Item_x0020_Cover;
                                 result.TeamLeaderUser.push(users);
                             }
-
                         })
                     }
                 })
@@ -862,7 +742,6 @@ function Groupby(props:any) {
                                 users.ItemCover = users.Item_x0020_Cover;
                                 result.TeamLeaderUser.push(users);
                             }
-
                         })
                     }
                 })
@@ -886,16 +765,11 @@ function Groupby(props:any) {
                 result['childs'] = result['childs'] != undefined ? result['childs'] : [];
                 result.SiteIcon = 'https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/component_icon.png'
                 ComponentsData.push(result);
-
-
             }
-
             if (result.Item_x0020_Type == 'SubComponent') {
                 result.SiteIcon = 'https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png'
                 result['childs'] = result['childs'] != undefined ? result['childs'] : [];
                 SubComponentsData.push(result);
-
-
             }
             if (result.Item_x0020_Type == 'Feature') {
                 result.SiteIcon = "https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png"
@@ -903,7 +777,6 @@ function Groupby(props:any) {
                 FeatureData.push(result);
             }
         });
-
         $.each(SubComponentsData, function (index: any, subcomp: any) {
             if (subcomp.Title != undefined) {
                 $.each(FeatureData, function (index: any, featurecomp: any) {
@@ -913,7 +786,6 @@ function Groupby(props:any) {
                 })
             }
         })
-
         $.each(ComponentsData, function (index: any, subcomp: any) {
             if (subcomp.Title != undefined) {
                 $.each(SubComponentsData, function (index: any, featurecomp: any) {
@@ -924,18 +796,16 @@ function Groupby(props:any) {
             }
         })
         //maidataBackup.push(ComponentsData)
-
         setmaidataBackup(ComponentsData)
         setData(ComponentsData);
     }
-
     var makeFinalgrouping = function () {
         var AllTaskData1: any = [];
         AllTaskData1 = AllTaskData1.concat(TasksItem);
         $.each(AllTaskData1, function (index: any, task: any) {
             task.Portfolio_x0020_Type = 'Component';
-            if (pageType == 'Service-Portfolio') {
-                if (task['Services'] != undefined && task['Services']['results'].length > 0) {
+            if (pageType == 'Component-Portfolio') {
+                if (task['Component'] != undefined && task['Component']['results'].length > 0) {
                     task.Portfolio_x0020_Type = 'Service';
                     findTaggedComponents(task);
                 }
@@ -949,7 +819,6 @@ function Groupby(props:any) {
     const filterDataBasedOnList = function () {
         //$scope.AllTaskData = angular.copy($scope.CopyTaskData);
         //$scope.AllTaskData = JSON.parse(JSON.stringify($scope.CopyTaskData));
-
         //$scope.AllTaskData = $scope.CopyTaskData.map(function (value) { value = Object.create(value); return value });
         var AllTaskData1: any = [];
         AllTaskData1 = AllTaskData1.concat(CopyTaskData);
@@ -984,11 +853,8 @@ function Groupby(props:any) {
     }
     var TasksItem: any = [];
     const LoadAllSiteTasks = function () {
-
         var query = "&$filter=Status ne 'Completed'&$orderby=Created desc&$top=4999";
         var Counter = 0;
-
-
         $.each(siteConfig, function (index: any, config: any) {
             if (config.Title != 'SDC Sites') {
                 //     $.each($scope.filterItems, function (filter) {
@@ -1023,7 +889,6 @@ function Groupby(props:any) {
                             item.flag = true;
                             item.siteType = config.Title;
                             item.childs = [];
-
                             if (item.SharewebCategories.results != undefined) {
                                 if (item.SharewebCategories.results.length > 0) {
                                     $.each(item.SharewebCategories.results, function (ind: any, value: any) {
@@ -1043,26 +908,21 @@ function Groupby(props:any) {
                             $.each(AllTasks, function (index: any, result: any) {
                                 result.TeamLeaderUser = []
                                 result.DueDate = Moment(result.DueDate).format('DD/MM/YYYY')
-
                                 if (result.DueDate == 'Invalid date' || '') {
                                     result.DueDate = result.DueDate.replaceAll("Invalid date", "")
                                 }
                                 result.PercentComplete = (result.PercentComplete * 100).toFixed(0);
-
                                 if (result.Short_x0020_Description_x0020_On != undefined) {
                                     result.Short_x0020_Description_x0020_On = result.Short_x0020_Description_x0020_On.replace(/(<([^>]+)>)/ig, '');
                                 }
-
                                 if (result.AssignedTo != undefined && result.AssignedTo.length > 0) {
                                     $.each(result.AssignedTo, function (index: any, Assig: any) {
                                         if (Assig.Id != undefined) {
                                             $.each(Response, function (index: any, users: any) {
-
                                                 if (Assig.Id != undefined && users.AssingedToUserId != undefined && Assig.Id == users.AssingedToUserId) {
                                                     users.ItemCover = users.Item_x0020_Cover;
                                                     result.TeamLeaderUser.push(users);
                                                 }
-
                                             })
                                         }
                                     })
@@ -1075,7 +935,6 @@ function Groupby(props:any) {
                                                     users.ItemCover = users.Item_x0020_Cover;
                                                     result.TeamLeaderUser.push(users);
                                                 }
-
                                             })
                                         }
                                     })
@@ -1092,7 +951,6 @@ function Groupby(props:any) {
                                 }
                                 TasksItem.push(result);
                                 // if (task.ClientCategory != undefined && task.ClientCategory.results != undefined && task.ClientCategory.results.length > 0) {
-
                                 //     $.each(task.ClientCategory.results, function (index: any, clientcategory: any) {
                                 //         task.ClientCategoryTitle = task.ClientCategoryTitle + ';' + clientcategory.Title;
                                 //     })
@@ -1126,14 +984,11 @@ function Groupby(props:any) {
                                 //                             }
                                 //                         })
                                 //                     })
-
                                 //                 }
                                 //             })
-
                                 //         }
                                 //     })
                                 // } else task.ClientCategory = [];
-
                                 // task['Item_x0020_Type'] = 'Task';
                                 // task['flag'] = true;
                                 // task['newTitle'] = task.Title;
@@ -1198,7 +1053,6 @@ function Groupby(props:any) {
                                 // task.TeamLeaderUser = []
                                 // getTeamLeadersName(task.Responsible_x0020_Team, task);
                                 // getTeamLeadersName(task.Team_x0020_Members, task);
-
                                 // // getTeamLeadersShowImage(task.Responsible_x0020_Team, task.AssignedUser, task['AdditionalTeam']);
                                 // // getTeamLeadersShowImage(task.Team_x0020_Members, task.TeamMemberUser, task['AdditionalTeam']);
                                 // TasksItem.push(task);
@@ -1225,20 +1079,13 @@ function Groupby(props:any) {
                     error: function (error) {
                         Counter++;
                     }
-
                 });
-
-
-
             } else Counter++;
-
         })
-
     }
     function Buttonclick(e: any) {
         e.preventDefault();
         this.setState({ callchildcomponent: true });
-
     }
     const setModalIsOpenToFalse = () => {
         setModalIsOpen(false)
@@ -1249,13 +1096,10 @@ function Groupby(props:any) {
     const closeModal = () => {
         setAddModalOpen(false)
     }
-
-
     const Prints = () => {
         window.print();
     }
     // ---------------------Export to Excel-------------------------------------------------------------------------------------
-
     const getCsvData = () => {
         const csvData = [['Title']];
         let i;
@@ -1266,19 +1110,14 @@ function Groupby(props:any) {
     };
     const clearSearch = () => {
         setSearch('')
-
     }
-
     const openEditPopup = () => {
         setEditpopup(true)
     }
     const EditpopupClose = () => {
         setEditpopup(false)
     }
-
     //------------------Edit Data----------------------------------------------------------------------------------------------------------------------------
-
-
     const getStructurefTimesheetCategories = function () {
         $.each(TaskTimeSheetCategories, function (index: any, item: any) {
             $.each(TaskTimeSheetCategories, function (index: any, val: any) {
@@ -1329,8 +1168,6 @@ function Groupby(props:any) {
             }
         })
     }
-
-
     const getStructureData = function () {
         $.each(AllTimeSpentDetails, function (index: any, item: any) {
             if (item.TimesheetTitle.Id == undefined) {
@@ -1351,7 +1188,6 @@ function Groupby(props:any) {
                                     // value.TaskTimeModifiedDate = SharewebCommonFactoryService.ConvertLocalTOServerDate(val.Modified, 'DD/MM/YYYY HH:mm');
                                     item.AdditionalTime.push(value);
                         })
-
                     }
                 })
             }
@@ -1483,7 +1319,6 @@ function Groupby(props:any) {
             categoryTitle.TaskDate = undefined
             categoryTitle.TaskTime = undefined
             categoryTitle.TimesheetTitle = [];
-
         });
         getStructurefTimesheetCategories();
         var filteres = "Task" + item.siteType + "/Id eq " + item.Id;
@@ -1494,21 +1329,14 @@ function Groupby(props:any) {
         { 'Url': "https://hhhhteams.sharepoint.com/sites/HHHH/SP/_api/web/lists/getbyid('11d52f95-4231-4852-afde-884d548c7f1b')/items?$select=" + select + "" }]
         $.each(allurls, function (index: any, item: any) {
             $.ajax({
-
                 url: item.Url,
-
                 method: "GET",
-
                 headers: {
-
                     "Accept": "application/json; odata=verbose"
-
                 },
-
                 success: function (data) {
                     count++;
                     if (data.d.results != undefined && data.d.results.length > 0) {
-
                         AllTimeSpentDetails = AllTimeSpentDetails.concat(data.d.results);
                     }
                     if (allurls.length == count) {
@@ -1550,7 +1378,6 @@ function Groupby(props:any) {
                                         console.log(e)
                                     }
                                 }
-
                                 $.each(Task, function (index: any, taskUser: any) {
                                     if (taskUser.AssingedToUserId == item.AuthorId) {
                                         item.AuthorName = taskUser.Title;
@@ -1565,18 +1392,15 @@ function Groupby(props:any) {
                             } else {
                                 AllAvailableTitle.push(item);
                             }
-
                             if (item.AdditionalTime == undefined) {
                                 item.AdditionalTime = [];
                             }
                             // item.ServerTaskDate = angular.copy(item.TaskDate);
                             // item.TaskDate = SharewebCommonFactoryService.ConvertLocalTOServerDate(item.TaskDate, 'DD/MM/YYYY');
                             item.isShifted = false;
-
                         })
                         getStructureData();
                     }
-
                 },
                 error: function (error) {
                     count++;
@@ -1586,36 +1410,24 @@ function Groupby(props:any) {
             })
         })
         // spRequest.onreadystatechange = function () {
-
         //     if (spRequest.readyState === 4 && spRequest.status === 200) {
         //         var result = JSON.parse(spRequest.responseText);
-
         //         if (result.value.ItemType == "Group") {
         //             result.value.UserType = "Group"
-
         //         }
         //         else {
-
         //             setEditdata(result.value)
-
         //         }
         //     }
-
         //     else if (spRequest.readyState === 4 && spRequest.status !== 200) {
         //         console.log('Error Occurred !');
         //     }
         //     setModalIsTimeOpenToTrue();
-
-
         // };
         // spRequest.send();
     }
-
-
-
     const handleTitle = (e: any) => {
         setTitle(e.target.value)
-
     };
     function AddItem() {
         var MyData = JSON.stringify({
@@ -1659,11 +1471,7 @@ function Groupby(props:any) {
                 alert('error');
             }
         });
-
-
     }
-
-
     // React.useEffect(()=>{
     //     eventBus.on("Successful", (data:any) =>
     //     setPassData({data:selected2)
@@ -1721,7 +1529,6 @@ function Groupby(props:any) {
                                                         Cancel
                                                     </button>
                                                 </div>
-
                                             </span>
                                         </span>
                                         <label>
@@ -1746,18 +1553,13 @@ function Groupby(props:any) {
                                                             <th style={{ width: "2%" }}>
                                                                 <div></div>
                                                             </th>
-
-
                                                             <th style={{ width: "20%" }}>
                                                                 <div style={{ width: "19%" }} className="smart-relative">
                                                                     <input type="search" placeholder="AuthorName" className="full_width searchbox_height" />
-
                                                                     <span className="sorticon">
                                                                         <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                         <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                     </span>
-
-
                                                                 </div>
                                                             </th>
                                                             <th style={{ width: "18%" }}>
@@ -1780,7 +1582,6 @@ function Groupby(props:any) {
                                                                         <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                         <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                     </span>
-
                                                                 </div>
                                                             </th>
                                                             <th style={{ width: "10%" }}>
@@ -1792,7 +1593,6 @@ function Groupby(props:any) {
                                                                         <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                         <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                     </span>
-
                                                                 </div>
                                                             </th>
                                                             <th style={{ width: "3%" }}></th>
@@ -1807,37 +1607,25 @@ function Groupby(props:any) {
                                                                             <td className="pad0" colSpan={6}>
                                                                                 <table className="table" style={{ width: "100%" }}>
                                                                                     <tr className="bold for-c0l">
-
-
-
                                                                                         <td style={{ width: "7%" }}>
-
                                                                                         </td>
                                                                                         {/* <td style={{ width: "6%" }}></td> */}
                                                                                         <td style={{ width: "20%" }}>
-
                                                                                         </td>
                                                                                         <td style={{ width: "18%" }}>
-
                                                                                         </td>
                                                                                         <td style={{ width: "20%" }}>
-
                                                                                         </td>
                                                                                         <td style={{ width: "10%" }}></td>
-
                                                                                         <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </td>
-
-
                                                                         </tr>
                                                                         {item.Childs != undefined && item.Childs.length > 0 && (
                                                                             <>
                                                                                 {item.Childs.map(function (childitem: any) {
-
                                                                                     return (
-
                                                                                         <>
                                                                                             <tr >
                                                                                                 <td className="pad0" colSpan={9}>
@@ -1845,34 +1633,28 @@ function Groupby(props:any) {
                                                                                                         <tr className="for-c02">
                                                                                                             <td style={{ width: "7%" }}>
                                                                                                                 <a className="hreflink"
-
                                                                                                                     title="Tap to expand the {{child.Title}} childs">
                                                                                                                     <img
                                                                                                                         src="{{baseUrl}}/SiteCollectionImages/ICONS/24/right-list-icon.png"></img>
                                                                                                                 </a>
                                                                                                                 <a className="hreflink"
-
                                                                                                                     title="Tap to Shrink the {{child.Title}} childs">
                                                                                                                     <img
                                                                                                                         src="{{baseUrl}}/SiteCollectionImages/ICONS/24/list-icon.png"></img>
                                                                                                                 </a>
                                                                                                                 <a className="hreflink"
-
                                                                                                                     title="Tap to expand the {{child.Title}} childs">
                                                                                                                     <img
                                                                                                                         src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png"></img>
                                                                                                                 </a>
                                                                                                                 <a className="hreflink"
-
                                                                                                                     title="Tap to Shrink the {{child.Title}} childs">
                                                                                                                     <img
                                                                                                                         src="{{baseUrl}}/SiteCollectionImages/ICONS/Service_Icons/Downarrowicon-green.png"></img>
                                                                                                                 </a>
                                                                                                             </td>
-
                                                                                                             <td style={{ width: "20%" }}>
                                                                                                                 <span>{item.Title} - {childitem.Title}</span>
-
                                                                                                                 <span className="ml5">
                                                                                                                     <img className="button-icon hreflink" title="Edit">
                                                                                                                     </img>
@@ -1888,7 +1670,6 @@ function Groupby(props:any) {
                                                                                                             <td style={{ width: "18%" }}>
                                                                                                                 <button type="button"
                                                                                                                     className="btn btn-primary pull-right mt-5 mr-0"
-
                                                                                                                 >
                                                                                                                     Add Time
                                                                                                                     <img className="button-icon hreflink"
@@ -1896,16 +1677,13 @@ function Groupby(props:any) {
                                                                                                                 </button>
                                                                                                             </td>
                                                                                                             <td style={{ width: "20%" }}>
-
                                                                                                             </td>
                                                                                                             <td style={{ width: "10%" }}>{childitem.PercentComplete}</td>
-
                                                                                                             <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td>
                                                                                                         </tr>
                                                                                                     </table>
                                                                                                 </td>
                                                                                             </tr>
-
                                                                                             {childitem.AdditionalTime != undefined && childitem.AdditionalTime.length > 0 && (
                                                                                                 <>
                                                                                                     {childitem.AdditionalTime.map(function (childinew: any) {
@@ -1915,9 +1693,6 @@ function Groupby(props:any) {
                                                                                                                     <td className="pad0" colSpan={10}>
                                                                                                                         <table className="table" style={{ width: "100%" }}>
                                                                                                                             <tr className="tdrow">
-
-
-
                                                                                                                                 <td style={{ width: "7%" }}>
                                                                                                                                     <img className="AssignUserPhoto1 wid29 bdrbox"
                                                                                                                                         title="{{subchild.AuthorName}}"
@@ -1927,9 +1702,7 @@ function Groupby(props:any) {
                                                                                                                                     <span
                                                                                                                                         className="ml-5">{childinew.AuthorName}</span>
                                                                                                                                 </td>
-
                                                                                                                                 <td style={{ width: "20%" }}>
-
                                                                                                                                     {childinew.TaskDate}
                                                                                                                                 </td>
                                                                                                                                 <td style={{ width: "18%" }}>
@@ -1943,7 +1716,6 @@ function Groupby(props:any) {
                                                                                                                                     <img
                                                                                                                                         src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_copy.png"></img>
                                                                                                                                 </a></td>
-
                                                                                                                                 <td style={{ width: "3%" }}>  <a className="hreflink"
                                                                                                                                 >
                                                                                                                                     <img
@@ -1956,15 +1728,12 @@ function Groupby(props:any) {
                                                                                                                 {childinew.AdditionalTime != undefined && childinew.AdditionalTime.length > 0 && (
                                                                                                                     <>
                                                                                                                         {childinew.AdditionalTime.map(function (subchilditem: any) {
-
                                                                                                                             return (
-
                                                                                                                                 <>
                                                                                                                                     <tr >
                                                                                                                                         <td className="pad0" colSpan={9}>
                                                                                                                                             <table className="table" style={{ width: "100%" }}>
                                                                                                                                                 <tr className="for-c02">
-
                                                                                                                                                     <td style={{ width: "7%" }}>
                                                                                                                                                         <img className="AssignUserPhoto1  bdrbox"
                                                                                                                                                             title="{{subchilds.AuthorName}}"
@@ -1974,7 +1743,6 @@ function Groupby(props:any) {
                                                                                                                                                         <span
                                                                                                                                                             className="ml-5">{subchilditem.AuthorName}</span>
                                                                                                                                                     </td>
-
                                                                                                                                                     <td style={{ width: "20%" }}>
                                                                                                                                                         {subchilditem.TaskDate}
                                                                                                                                                     </td>
@@ -1988,7 +1756,6 @@ function Groupby(props:any) {
                                                                                                                                                         <img
                                                                                                                                                             src="{{baseUrl}}/SiteCollectionImages/ICONS/32/icon_copy.png"></img>
                                                                                                                                                     </a></td>
-
                                                                                                                                                     <td style={{ width: "3%" }}>
                                                                                                                                                         <a className="hreflink"
                                                                                                                                                         >
@@ -2004,8 +1771,6 @@ function Groupby(props:any) {
                                                                                                                         })}
                                                                                                                     </>
                                                                                                                 )}
-
-
                                                                                                             </>
                                                                                                         )
                                                                                                     })}</>
@@ -2015,18 +1780,10 @@ function Groupby(props:any) {
                                                                             </>
                                                                         )}
                                                                     </>
-
-
                                                                 )
                                                             }
                                                         })}
-
-
-
                                                     </tbody>
-
-
-
                                                 </table>
                                                 <div className="right-col pt-0 MtPb"
                                                 >
@@ -2075,8 +1832,6 @@ function Groupby(props:any) {
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>
                                                 </select>
-
-
                                             </div>
                                             <div className="col-4 mb-10">
                                                 <label>Item Type</label>
@@ -2088,21 +1843,17 @@ function Groupby(props:any) {
                                             </div>
                                         </div>
                                         <div className="row">
-
                                             <div className="col-sm-6 pad0">
                                                 <div ng-show="Item.Portfolio_x0020_Type=='Service'"
                                                     className="col-sm-12 mb-10 Doc-align padL-0">
                                                     <div className="col-sm-11 PadR0 Doc-align">
                                                         <label>
-                                                          
                                                             <span data-toggle="popover" data-placement="right"
                                                                 data-trigger="hover"
                                                                 data-content="Click to activate auto suggest for components/services"
                                                                 data-original-title="Click to activate auto suggest for components/services"
                                                                 title="Click to activate auto suggest for components/services">
-
                                                             </span>
-
                                                         </label>
                                                         <input type="text" className="form-control ui-autocomplete-input"
                                                             id="txtSharewebComponent" ng-model="SearchComponent"
@@ -2114,21 +1865,17 @@ function Groupby(props:any) {
                                                         <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/edititem.gif"
                                                             ng-click="EditComponent('Components',item)" />
                                                     </div>
-
                                                 </div>
                                                 <div ng-show="Item.Portfolio_x0020_Type=='Component'"
                                                     className="col-sm-12 padL-0">
                                                     <div className="col-sm-11 pad0 Doc-align">
-
                                                         <label>
                                                             <span data-toggle="popover" data-placement="right"
                                                                 data-trigger="hover"
                                                                 data-content="Click to activate auto suggest for components/services"
                                                                 data-original-title="Click to activate auto suggest for components/services"
                                                                 title="Click to activate auto suggest for components/services">
-
                                                             </span>
-
                                                         </label>
                                                         <input type="text" className="form-control ui-autocomplete-input"
                                                             id="txtServiceSharewebComponent" ng-model="SearchService"
@@ -2137,11 +1884,8 @@ function Groupby(props:any) {
                                                     </div>
                                                     <div className="col-sm-1 no-padding">
                                                         <label className="full_width">&nbsp;</label>
-
                                                     </div>
-
                                                 </div>
-
                                             </div>
                                             <div className="col-sm-6 padR0">
                                                 <label>Deliverable-Synonyms </label>
@@ -2164,7 +1908,6 @@ function Groupby(props:any) {
                 </div>
             </Modal>
             {/* ------------------------Add Popup------------------------------------------------------------------------------------------------------------------------------ */}
-
             <Modal
                 isOpen={addModalOpen}
                 onDismiss={closeModal}
@@ -2189,32 +1932,29 @@ function Groupby(props:any) {
             </Modal>
             {/* -----------------------------------------end-------------------------------------------------------------------------------------------------------------------------------------- */}
             <div className="col-sm-12 padL-0 PadR0">
-               
             </div>
-           
             <section className="TableContentSection">
                 <div className="container-fluid">
                     <section className="TableSection">
                         <div className="container pad0">
                             <div className="Alltable mt-10">
-                            <div className="tbl-headings">
+                                <div className="tbl-headings">
                                     <span className="leftsec w65">
-                                    <label>
-                        <span>
-                            <img style={{ height: "24px", width: "24px", marginTop: "-2px" }}
-                                src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Shareweb/component_icon.png" />
-                        </span>
-                        <span>
-                            {/* {data.map(item => <a>{item.Title}</a>)} */}
-                            {/* <a>Contact Database</a> */}
-                            <a>{props.title}</a>
-                        </span>
-                    </label>
+                                        <label>
+                                            <span>
+                                                <img style={{ height: "24px", width: "24px", marginTop: "-2px" }}
+                                                    src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Shareweb/component_icon.png" />
+                                            </span>
+                                            <span>
+                                                {/* {data.map(item => <a>{item.Title}</a>)} */}
+                                                {/* <a>Contact Database</a> */}
+                                                <a>{props.title}</a>
+                                            </span>
+                                        </label>
                                         <span className="g-search">
                                             <input type="text" className="searchbox_height full_width" id="globalSearch" placeholder="search all" />
                                             <span className="gsearch-btn" ><i><FaSearch /></i></span>
                                         </span>
-                                        
                                     </span>
                                     <span className="toolbox mx-auto">
                                         <button type="button" className="btn btn-primary"
@@ -2222,17 +1962,13 @@ function Groupby(props:any) {
                                             onClick={addModal} title=" Add Structure">
                                             Add Structure
                                         </button>
-
                                         <button type="button"
                                             className="btn {{(compareComponents.length==0 && SelectedTasks.length==0)?'btn-grey':'btn-primary'}}"
                                             ng-click="openActivity()"
                                             disabled={true}>
-
                                             <MdAdd />
                                             Add Activity-Task
                                         </button>
-
-
                                         <button type="button"
                                             className="btn {{(compareComponents.length==0 && SelectedTasks.length==0)?'btn-grey':'btn-primary'}}"
                                             ng-click="openRestructure()"
@@ -2240,13 +1976,13 @@ function Groupby(props:any) {
                                             Restructure
                                         </button>
                                         <button type="button"
-                        className="btn {{(compareComponents.length==0 && SelectedTasks.length==0)?'btn-grey':'btn-primary'}}"
-                        disabled={true}>
-                        Compare
-                    </button>
-                    <a>
-                        <Tooltip />
-                    </a>
+                                            className="btn {{(compareComponents.length==0 && SelectedTasks.length==0)?'btn-grey':'btn-primary'}}"
+                                            disabled={true}>
+                                            Compare
+                                        </button>
+                                        <a>
+                                            <Tooltip />
+                                        </a>
                                         {/* <span>
                                         <ExpandTable/>
                                         </span> */}
@@ -2262,25 +1998,21 @@ function Groupby(props:any) {
                                                             <div></div>
                                                         </th>
                                                         <th style={{ width: "7%" }}>
-                                                            <div style={{ width: "7%" }} className="smart-relative"> 
-                                                            <input type="search" placeholder="Task Id" className="full_width searchbox_height" onChange={event => handleChange1(event, 'Title')} />
-
-<span className="sorticon">
-    <span className="up" onClick={sortBy}>< FaAngleUp /></span>
-    <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
-</span>
+                                                            <div style={{ width: "7%" }} className="smart-relative">
+                                                                <input type="search" placeholder="Task Id" className="full_width searchbox_height" onChange={event => handleChange1(event, 'Title')} />
+                                                                <span className="sorticon">
+                                                                    <span className="up" onClick={sortBy}>< FaAngleUp /></span>
+                                                                    <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
+                                                                </span>
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "20%" }}>
                                                             <div style={{ width: "19%" }} className="smart-relative">
                                                                 <input type="search" placeholder="Title" className="full_width searchbox_height" onChange={event => handleChange1(event, 'Title')} />
-
                                                                 <span className="sorticon">
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
-
-
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "18%" }}>
@@ -2303,7 +2035,6 @@ function Groupby(props:any) {
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
-
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "10%" }}>
@@ -2315,7 +2046,6 @@ function Groupby(props:any) {
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
-
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "10%" }}>
@@ -2338,7 +2068,6 @@ function Groupby(props:any) {
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
-
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "3%" }}></th>
@@ -2354,7 +2083,6 @@ function Groupby(props:any) {
                                                                         <td className="pad0" colSpan={9}>
                                                                             <table className="table" style={{ width: "100%" }}>
                                                                                 <tr className="bold for-c0l">
-
                                                                                     <td style={{ width: "2%" }}>
                                                                                         <div className="accordian-header" onClick={() => handleOpen(item)}>
                                                                                             {item.childs != undefined &&
@@ -2366,9 +2094,7 @@ function Groupby(props:any) {
                                                                                                 </a>
                                                                                             }
                                                                                         </div>
-
                                                                                     </td>
-
                                                                                     <td style={{ width: "7%" }}>
                                                                                         <div className="">
                                                                                             <span>
@@ -2394,7 +2120,6 @@ function Groupby(props:any) {
                                                                                         {item.childs != undefined &&
                                                                                             <span>({item.childs.length})</span>
                                                                                         }
-
                                                                                         {item.Short_x0020_Description_x0020_On != null &&
                                                                                             <span className="project-tool"><img
                                                                                                 src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/infoIcon.png" /><span className="tooltipte">
@@ -2423,9 +2148,7 @@ function Groupby(props:any) {
                                                                                             return (
                                                                                                 <span className="ClientCategory-Usericon"
                                                                                                     title={client1.Title}>
-
                                                                                                     <a>{client1.Title.slice(0, 2).toUpperCase()}</a>
-
                                                                                                 </span>
                                                                                             )
                                                                                         })}</div></td>
@@ -2438,15 +2161,12 @@ function Groupby(props:any) {
                                                                                 </tr>
                                                                             </table>
                                                                         </td>
-
-
                                                                     </tr>
                                                                     {item.show && item.childs.length > 0 && (
                                                                         <>
                                                                             {item.childs.map(function (childitem: any) {
                                                                                 if (childitem.flag == true) {
                                                                                     return (
-
                                                                                         <>
                                                                                             <tr >
                                                                                                 <td className="pad0" colSpan={9}>
@@ -2462,24 +2182,20 @@ function Groupby(props:any) {
                                                                                                                             </div>
                                                                                                                         </a>
                                                                                                                     }
-
                                                                                                                 </div>
                                                                                                             </td>
                                                                                                             {/* <td style={{ width: "2%" }}></td> */}
                                                                                                             <td style={{ width: "7%" }}>  <div className="d-flex">
                                                                                                                 <span>
-
                                                                                                                     <a className="hreflink" title="Show All Child" data-toggle="modal">
                                                                                                                         <img className="icon-sites-img ml20" src={childitem.SiteIcon}></img>
                                                                                                                         {/* <img className="icon-sites-img"
                                                                                                                         src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png" /> */}
                                                                                                                     </a>
-
                                                                                                                 </span>
                                                                                                                 <span className="ml-2">{childitem.Shareweb_x0020_ID}</span>
                                                                                                             </div>
                                                                                                             </td>
-
                                                                                                             <td style={{ width: "20%" }}>
                                                                                                                 {childitem.siteType == "Master Tasks" && <a className="hreflink serviceColor_Active" target="_blank"
                                                                                                                     href={"https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=" + childitem.Id}
@@ -2492,7 +2208,6 @@ function Groupby(props:any) {
                                                                                                                 {childitem.childs.length > 0 &&
                                                                                                                     <span>({childitem.childs.length})</span>
                                                                                                                 }
-
                                                                                                                 {childitem.Short_x0020_Description_x0020_On != null &&
                                                                                                                     <span className="project-tool"><img
                                                                                                                         src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/infoIcon.png" /><span className="tooltipte">
@@ -2521,9 +2236,7 @@ function Groupby(props:any) {
                                                                                                                     return (
                                                                                                                         <div className="ClientCategory-Usericon"
                                                                                                                             title={client1.Title}>
-
                                                                                                                             <a>{client1.Title.slice(0, 2).toUpperCase()}</a>
-
                                                                                                                         </div>
                                                                                                                     )
                                                                                                                 })}</div></td>
@@ -2536,7 +2249,6 @@ function Groupby(props:any) {
                                                                                                     </table>
                                                                                                 </td>
                                                                                             </tr>
-
                                                                                             {childitem.show && childitem.childs.length > 0 && (
                                                                                                 <>
                                                                                                     {childitem.childs.map(function (childinew: any) {
@@ -2556,30 +2268,22 @@ function Groupby(props:any) {
                                                                                                                                                         : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/Service_Icons/Rightarrowicon-green.png" />}
                                                                                                                                                     </div>
                                                                                                                                                 </a>
-
                                                                                                                                             </div>
                                                                                                                                         }
                                                                                                                                     </td>
-
-
                                                                                                                                     <td style={{ width: "7%" }}> <div className="d-flex">
                                                                                                                                         <span>
-
                                                                                                                                             <a className="hreflink" title="Show All Child" data-toggle="modal">
                                                                                                                                                 <img className="icon-sites-img ml20" src={childinew.SiteIcon}></img>
                                                                                                                                                 {/* <img  className="icon-sites-img" 
                                                                                                                                         src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/feature_icon.png" /> */}
                                                                                                                                             </a>
-
                                                                                                                                         </span>
                                                                                                                                         <span className="ml-2">{childinew.Shareweb_x0020_ID}</span>
                                                                                                                                     </div>
                                                                                                                                     </td>
-
                                                                                                                                     <td style={{ width: "20%" }}>
-
                                                                                                                                         {childinew.siteType == "Master Tasks" && <a className="hreflink serviceColor_Active" target="_blank"
-
                                                                                                                                             href={"https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=" + childinew.Id}
                                                                                                                                         >{childinew.Title}
                                                                                                                                         </a>}
@@ -2590,7 +2294,6 @@ function Groupby(props:any) {
                                                                                                                                         {childinew.childs.length > 0 &&
                                                                                                                                             <span>({childinew.childs.length})</span>
                                                                                                                                         }
-
                                                                                                                                         {childinew.Short_x0020_Description_x0020_On != null &&
                                                                                                                                             <span className="project-tool"><img
                                                                                                                                                 src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/infoIcon.png" /><span className="tooltipte">
@@ -2619,9 +2322,7 @@ function Groupby(props:any) {
                                                                                                                                             return (
                                                                                                                                                 <span className="ClientCategory-Usericon"
                                                                                                                                                     title={client1.Title}>
-
                                                                                                                                                     <a>{client1.Title.slice(0, 2).toUpperCase()}</a>
-
                                                                                                                                                 </span>
                                                                                                                                             )
                                                                                                                                         })}</div></td>
@@ -2637,9 +2338,7 @@ function Groupby(props:any) {
                                                                                                                     {childinew.show && childinew.childs.length > 0 && (
                                                                                                                         <>
                                                                                                                             {childinew.childs.map(function (subchilditem: any) {
-
                                                                                                                                 return (
-
                                                                                                                                     <>
                                                                                                                                         <tr >
                                                                                                                                             <td className="pad0" colSpan={9}>
@@ -2655,24 +2354,20 @@ function Groupby(props:any) {
                                                                                                                                                                 </div> */}
                                                                                                                                                                     </a>
                                                                                                                                                                 }
-
                                                                                                                                                             </div>
                                                                                                                                                         </td>
                                                                                                                                                         {/* <td style={{ width: "2%" }}></td> */}
                                                                                                                                                         <td style={{ width: "7%" }}>  <div className="d-flex">
                                                                                                                                                             <span>
-
                                                                                                                                                                 <a className="hreflink" title="Show All Child" data-toggle="modal">
                                                                                                                                                                     <img className="icon-sites-img ml20" src={subchilditem.SiteIcon}></img>
                                                                                                                                                                     {/* <img className="icon-sites-img"
                                                                                                                         src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/Service_Icons/SubComponent_icon.png" /> */}
                                                                                                                                                                 </a>
-
                                                                                                                                                             </span>
                                                                                                                                                             <span className="ml-2">{subchilditem.Shareweb_x0020_ID}</span>
                                                                                                                                                         </div>
                                                                                                                                                         </td>
-
                                                                                                                                                         <td style={{ width: "20%" }}>
                                                                                                                                                             {subchilditem.siteType == "Master Tasks" && <a className="hreflink serviceColor_Active" target="_blank"
                                                                                                                                                                 href={"https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=" + childitem.Id}
@@ -2685,7 +2380,6 @@ function Groupby(props:any) {
                                                                                                                                                             {subchilditem.childs.length > 0 &&
                                                                                                                                                                 <span>({subchilditem.childs.length})</span>
                                                                                                                                                             }
-
                                                                                                                                                             {subchilditem.Short_x0020_Description_x0020_On != null &&
                                                                                                                                                                 <span className="project-tool"><img
                                                                                                                                                                     src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/infoIcon.png" /><span className="tooltipte">
@@ -2714,9 +2408,7 @@ function Groupby(props:any) {
                                                                                                                                                                 return (
                                                                                                                                                                     <div className="ClientCategory-Usericon"
                                                                                                                                                                         title={client1.Title}>
-
                                                                                                                                                                         <a>{client1.Title.slice(0, 2).toUpperCase()}</a>
-
                                                                                                                                                                     </div>
                                                                                                                                                                 )
                                                                                                                                                             })}</div></td>
@@ -2734,8 +2426,6 @@ function Groupby(props:any) {
                                                                                                                             })}
                                                                                                                         </>
                                                                                                                     )}
-
-
                                                                                                                 </>
                                                                                                             )
                                                                                                         }
@@ -2747,18 +2437,10 @@ function Groupby(props:any) {
                                                                         </>
                                                                     )}
                                                                 </>
-
-
                                                             )
                                                         }
                                                     })}
-
-
-
                                                 </tbody>
-
-
-
                                             </table>
                                         </div>
                                     </div>
@@ -2773,9 +2455,6 @@ export default Groupby;
 function RetrieveSPData() {
     throw new Error("Function not implemented.");
 }
-
-
 function openModal(): React.MouseEventHandler<HTMLAnchorElement> {
     throw new Error("Function not implemented.");
 }
-

@@ -5,11 +5,12 @@ import '../TestWithDiff/foundation.scss';
 import './styles.css';
 import * as Moment from 'moment';
 import Tooltip from '../../popup';
-import Groupbyt from '../../Groupbyt';
+import "bootstrap/dist/css/bootstrap.min.css";
 // import Groupby from '../../GroupBys';
-import Groupby from '../../GroupBywe';
+import '../TestWithDiff/foundationmin.scss';
+import Groupby from '../../Groupbyt';
+// import Groupby from '../../GroupBy';
 // import Tooltip from '../popup';
-// import Groupbyt from '../Groupbyt';
 // import PopupOfdata from '../PopupOfdata';
 // import GetData from '../../GetCall';
 // import { NavItem } from 'react-bootstrap';
@@ -27,11 +28,11 @@ function Portfolio({ID}:any) {
     const handleOpen = (item: any) => {
         setIsActive(current => !current);
         setIsActive(true);
-        item.show = item.show = item.show == true ? false : true;
+        item.show = item.show = item.show == false ? true : false;
         setArray(array => ([...array]));
     };
     const handleOpen1 = (item: any) => {
-        item.showl = item.showl = item.showl == true ? false : true;
+        item.showl = item.showl = item.showl == false ? true : false;
         setdatam(datam => ([...datam]));
     };
     const handleOpen2 = (item: any) => {
@@ -56,9 +57,12 @@ function Portfolio({ID}:any) {
         item.showm = item.showm = item.showm == true ? false : true;
         setdatams(datams => ([...datams]));
     };
+
+
+   
     React.useEffect(() => {
            
-        var url = `https://hhhhteams.sharepoint.com/sites/HHHH/SP/_api/lists/getbyid('EC34B38F-0669-480A-910C-F84E92E58ADF')/items?$select=Item_x0020_Type,Portfolio_x0020_Type,Site,FolderID,PortfolioLevel,PortfolioStructureID,ValueAdded,Idea,TaskListName,TaskListId,WorkspaceType,CompletedDate,ClientActivityJson,ClientSite,Item_x002d_Image,Sitestagging,SiteCompositionSettings,TechnicalExplanations,Deliverables,ComponentPortfolio/Id,ComponentPortfolio/Title,ServicePortfolio/Id,ServicePortfolio/Title,Package,Short_x0020_Description_x0020_On,Short_x0020_Description_x0020__x,Short_x0020_description_x0020__x0,Admin_x0020_Notes,AdminStatus,Background,Help_x0020_Information,BasicImageInfo,Item_x0020_Type,AssignedTo/Title,AssignedTo/Name,AssignedTo/Id,Component/Id,Component/Title,Component/ItemType,Component/ItemType,Categories,FeedBack,component_x0020_link,FileLeafRef,Title,Id,Comments,StartDate,DueDate,Status,Body,Company,Mileage,PercentComplete,FeedBack,Attachments,Priority,Created,Modified,PermissionGroup/Id,PermissionGroup/Title,Team_x0020_Members/Id,Team_x0020_Members/Title,Services/Id,Services/Title,Services/ItemType,Parent/Id,Parent/Title,Parent/ItemType,SharewebCategories/Id,SharewebCategories/Title,ClientCategory/Id,ClientCategory/Title&$expand=ClientCategory,ComponentPortfolio,ServicePortfolio,Parent,AssignedTo,Services,Team_x0020_Members,Component,PermissionGroup,SharewebCategories&$filter=Id eq ${ID}&$top=4999`;
+        var url = `https://hhhhteams.sharepoint.com/sites/HHHH/SP/_api/lists/getbyid('EC34B38F-0669-480A-910C-F84E92E58ADF')/items?$select=ItemRank,Item_x0020_Type,Portfolio_x0020_Type,Site,FolderID,PortfolioLevel,PortfolioStructureID,ValueAdded,Idea,TaskListName,TaskListId,WorkspaceType,CompletedDate,ClientActivityJson,ClientSite,Item_x002d_Image,Sitestagging,SiteCompositionSettings,TechnicalExplanations,Deliverables,ComponentPortfolio/Id,ComponentPortfolio/Title,ServicePortfolio/Id,ServicePortfolio/Title,Package,Short_x0020_Description_x0020_On,Short_x0020_Description_x0020__x,Short_x0020_description_x0020__x0,Admin_x0020_Notes,AdminStatus,Background,Help_x0020_Information,BasicImageInfo,Item_x0020_Type,AssignedTo/Title,AssignedTo/Name,AssignedTo/Id,Component/Id,Component/Title,Component/ItemType,Component/ItemType,Categories,FeedBack,component_x0020_link,FileLeafRef,Title,Id,Comments,StartDate,DueDate,Status,Body,Company,Mileage,PercentComplete,FeedBack,Attachments,Priority,Created,Modified,PermissionGroup/Id,PermissionGroup/Title,Team_x0020_Members/Id,Team_x0020_Members/Title,Services/Id,Services/Title,Services/ItemType,Parent/Id,Parent/Title,Parent/ItemType,SharewebCategories/Id,SharewebCategories/Title,ClientCategory/Id,ClientCategory/Title&$expand=ClientCategory,ComponentPortfolio,ServicePortfolio,Parent,AssignedTo,Services,Team_x0020_Members,Component,PermissionGroup,SharewebCategories&$filter=Id eq ${ID}&$top=4999`;
         var response: any = [];  // this variable is used for storing list items
         function GetListItems() {
             $.ajax({
@@ -121,9 +125,17 @@ function Portfolio({ID}:any) {
     
             if(item.ClientCategory.results.length!=0){
                 item.ClientCategory.results.map((terms: any)=>{
-                   myarray2.push(terms);
+                //     if(myarray2.length!=0 && myarray2[0].title==terms.title){
+                //                ""
+                //     }else{
+                //    myarray2.push(terms);
+                // }
+                myarray2.push(terms);
                })
+
            }
+        //    const letters = new Set([myarray2]);
+            
                 console.log(myarray2)
             
           
@@ -167,7 +179,7 @@ function Portfolio({ID}:any) {
                                             </span>
                                             {/* <img className="icon-sites-img" ng-show="Task.isNewItem"
                                      src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/Service_Icons/NewItemIcon-green.png" /> */}
-                                            <a ng-if="isMemberOwner==true  isOwner==true" className="hreflink"
+                                            {/* <a ng-if="isMemberOwner==true  isOwner==true" className="hreflink"
                                                 title="EditTask" ng-click="EditTask(Task)">
                                                 <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/32/edititem.gif" />
                                             </a>
@@ -176,13 +188,13 @@ function Portfolio({ID}:any) {
                                                 href="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/PortfolioDescriptionForm.aspx?taskId={{Task.WebpartItemId}}">
                                                 <img className="wid-20"
                                                     src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/32/help_Icon.png" />
-                                            </a>
+                                            </a> */}
                                         </h1>
                                     </div>
                                 </div>
                                 <div className="col-lg-12 pad0">
-                                    <div className="col-lg-8 left-col">
-                                        <div className="row">
+                                    <div className="col-lg-8 left-col pad0">
+                                        <div className="">
                                             <div className="col-sm-12 pad0">
                                                 <div className="involve_actor">
                                                     <div className="tmvalue impact-info53" title="due date">
@@ -192,7 +204,7 @@ function Portfolio({ID}:any) {
                                                         <span>
                                                             {/* <i> 02/12/2019</i> */}
                                                             {data.map(item =>
-                                                                <i>{item.DueDate != null ? Moment(item.DueDate).format('DD/MM/YYYY') : ""}</i>
+                                                                <a>{item.DueDate != null ? Moment(item.DueDate).format('DD/MM/YYYY') : ""}</a>
                                                             )}
                                                             {/* {data.map(item =>  <i>{item.DueDate}</i>)} */}
                                                         </span>
@@ -208,7 +220,7 @@ function Portfolio({ID}:any) {
                                                     <div className="tlvalue impact-infoII "
                                                     >
                                                         {data.map(item =>
-                                                            <i>{item.Priority != null ? item.Priority : ""}</i>)}
+                                                            <a>{item.Priority != null ? item.Priority : ""}</a>)}
                                                         <span
                                                             className="hreflink pull-right" title="Edit Inline"
                                                             ng-click="EditContents(Task,'editablePriority')">
@@ -224,7 +236,7 @@ function Portfolio({ID}:any) {
                                                     </div>
                                                     <div className="tlvalue impact-infoII">
                                                         {data.map(item =>
-                                                            <i>{item.StartDate != null ? Moment(item.StartDate).format('DD/MM/YYYY') : ""}</i>
+                                                            <a>{item.StartDate != null ? Moment(item.StartDate).format('DD/MM/YYYY') : ""}</a>
                                                         )}
                                                         <span
                                                             className="hreflink pull-right" title="Edit Inline"
@@ -238,7 +250,7 @@ function Portfolio({ID}:any) {
                                                     <div className="tlvalue impact-infoII"
                                                     >
                                                         {data.map(item =>
-                                                            <i>{item.CompletedDate != null ? Moment(item.CompletedDate).format('DD/MM/YYYY') : ""}</i>)}
+                                                            <a>{item.CompletedDate != null ? Moment(item.CompletedDate).format('DD/MM/YYYY') : ""}</a>)}
                                                         <span
                                                             className="hreflink pull-right" title="Edit Inline"
                                                         >
@@ -253,14 +265,14 @@ function Portfolio({ID}:any) {
                                                         <label className="full_width">Status</label>
                                                     </div>
                                                     <div className="tlvalue impact-infoII ">
-                                                        {data.map(item => <i>{item.Status}</i>)}
+                                                        {data.map(item => <a>{item.Status}</a>)}
                                                         
                                                     </div>
                                                     <div className="tmvalue impact-info53" title="Task Category">
                                                         <label className="full_width">Categories </label>
                                                     </div>
                                                     <div className="tlvalue impact-infoII ">
-                                                        {data.map(item => <i>{item.Categories}</i>)}
+                                                        {data.map(item => <a>{item.Categories}</a>)}
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,7 +291,7 @@ function Portfolio({ID}:any) {
                                                     </div>
                                                     <div className="tlvalue impact-infoII "
                                                     >
-                                                        {data.map(item => <i>{item.PercentComplete}</i>)}
+                                                        {data.map(item => <a>{item.PercentComplete}</a>)}
                                                         <span className="pull-right">
                                                             <span className="pencil_icon">
                                                                 <span ng-show="isOwner" className="hreflink"
@@ -294,13 +306,13 @@ function Portfolio({ID}:any) {
                                             </div>
                                             <div className="col-sm-12 pad0">
                                                 <div className="involve_actor ">
-                                                    <div className="tmvalue"
+                                                    <div className="tmvalue" style={{ flexBasis: "20.5%"}}
                                                         title="Item Rank">
                                                         <label className="full_width">Item Rank</label>
                                                     </div>
                                                     <div className="tlvalue impact-infoII"
                                                     >
-                                                        {data.map(item => <i>{item.ItemRank}</i>)}
+                                                        {data.map(item => <a>{item.ItemRank}</a>)}
                                                         <span className="pull-right">
                                                             <span className="hreflink"
                                                                 title="Edit Inline"
@@ -314,6 +326,7 @@ function Portfolio({ID}:any) {
                                             </div>
                                         </div>
                                     </div>
+                                    {data.map(item=>
                                     <div className="col-lg-4 pad0">
                                         <div className="col-sm-12 pad0">
                                             <div className="involve_actor">
@@ -321,7 +334,7 @@ function Portfolio({ID}:any) {
                                                     className="tmvalue impact-info53" title="ServicePortfolio">
                                                     <label className="full_width">Service Portfolio</label>
                                                 </div>
-                                                {data.map(item=>
+                                                
                                                           
                                                 <div ng-show="Task.Portfolio_x0020_Type=='Component'"
                                                     className="tlvalue impact-infoII ">
@@ -331,7 +344,7 @@ function Portfolio({ID}:any) {
                                                     </div>
                                                    
                                                 </div>
-                                     )}
+                                     
                                             </div>
                                         </div>
                                         {myarray1.length!=0?
@@ -339,7 +352,7 @@ function Portfolio({ID}:any) {
                                             className="col-sm-12 pad0 dashboard-sm-12">
                                             <div className="panel panel-primary-head blocks"
                                                 style={{ boxShadow: "none", transition: "none" }} id="t_draggable1">
-                                                <div className="panel-heading profileboxclr"
+                                                <div className="panel-heading profileboxclr clearfix"
                                                     style={{ backgroundColor: "#f5f5f5", padding: "7px" }}>
                                                     <a className="panel-title" >
                                                         
@@ -347,6 +360,10 @@ function Portfolio({ID}:any) {
                                                           {/* {myarray.length!=0?myarray[0].map((items: any)=>  */}
                                                            {data.map(item =>
                                                                 <span className="accordian-header" onClick={() => handleOpen3(item)}>
+                                                                     <a className='hreflink'
+                                                                        title="Tap to expand the childs">
+                                                                        <span className="sign">{item.showk ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                                            : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />}</span></a>
                                                                     <label className="lbltitleclr">
                                                         
                                                         Site
@@ -355,79 +372,12 @@ function Portfolio({ID}:any) {
                                                     <a className="hreflink ng-scope" title="Analyse Site Composition" >
                                                         <img className="wid-20"  data-themekey="#" src="https://hhhhteams.sharepoint.com/sites/HHHH/SiteCollectionImages/ICONS/32/analyze.png" />
                                                     </a>
-                                                                    <a className='hreflink'
-                                                                        title="Tap to expand the childs">
-                                                                        <span className="sign">{item.showk ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                            : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />}</span>
+                                                                   
                                                                             
-                                                                            {item.showk &&
-                                                                           
-                                                                                <ul className="list-unstyled mb-0 fortablee" style={{ fontWeight: "normal" }}>
-                                                                                {myarray1.length!=0?myarray1.map((item: any)=>
-                                                                                    <li
-                                                                                        className="SiteCompositionlist for-lis">
-                                                                                        <div className="SiteCompositionlist-SiteImage" style={{width:"10%"}}>
-                                                                                            <img style={{ width: "22px" }} src={item.SiteImages} data-themekey="#" />
-                                                                                        </div>
-                                                                                        <div style={{width:"90%"}} className="SiteCompositionlist-ClienTimeDescription">
-                                                                                            {/* {{item.ClienTimeDescription.substring(0,2)}}% */}
-                                                                                            {/* {data.map(item =><i>{item.ClienTimeDescription.substring(0,2)}%</i>)} */}
-                                                                                            
-                                                                                            <span ng-show="item.ClienTimeDescription!=undefined &amp;&amp; item.Title!='Health' &amp;&amp; item.Title!='Gender'" className="ng-binding">
-                                                                                            {item.ClienTimeDescription}%
-                                                                                            </span>
-                                                                                        </div>
-                                                                                       {item.Title=='EPS' &&
-                                                                                        <div ng-show="item.Title=='EPS'"
-                                                                                            className="SiteCompositionlist-ClientTitle">
-                                                                                                {myarray2.length!=0? myarray2.map((client: any)=>{
-                                                                                                            return( 
-                                                                                            <div className="Members-Item">
-                                                                                          
-                                                                                                <div ng-show="client.siteName=='EPS'"
-                                                                                                    className="user-Member-img"
-                                                                                                    ng-repeat="client in Task.ClientCategory.results">
-                                                                                                         {client.Title=="Kontakt Verwaltung" ||client.Title== "Shareweb Maintenance"||client.Title== "Newsletter Einbindung"||client.Title=="PSE-Partnerschaften"  &&
-                                                                                                    <span> 
-                                                                                                       
-                                                                                                        {client.Title} 
-                                                                                                   
-                                                                                                        </span>
-                                                                                                        }
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        )
-                                                                                    }):""} 
-                                                                                        </div>
-                                                                                        }
-                                                                                        {item.Title=='EI'&&
-                                                                                        <div ng-show="item.Title=='EI'"
-                                                                                            className="SiteCompositionlist-ClientTitle">
-                                                                                                 { myarray2.length!=0?myarray2.map((client: any)=>{
-                                                                                                    return(
-                                                                                            <div className="Members-Item">
-                                                                                                <div ng-show="client.siteName=='EI'"
-                                                                                                    className="user-Member-img"
-                                                                                                    ng-repeat="client in Task.ClientCategory.results">
-                                                                                                          {client.Title=="Nutzer Verwaltung" ||client.Title== "Shareweb Maintenance" ||client.Title== "EI Projekt-Übersicht" &&
-                                                                                                    <span> 
-                                                                                                       
-                                                                                                        {client.Title}
-                                                                                                         </span>
-                                                                                                 }
-                                                                                                </div>
-                                                                                                    
-                                                                                            </div>
-                                                                                               ) }):""} 
-                                                                                        </div>
-                                                                                        }
-                                                                                    </li>
-                                                                                ):""}
-                                                                                </ul>
-                                                                           }
+                                                                          
                                                            
                                                                        
-                                                                    </a>
+                                                                    
                                                                 </span>
                                                            )}
                                                             {/* <span ng-if="Task.expanded2 &amp;&amp;Task.Portfolio_x0020_Type=='Component'" style={{ cursor: "pointer" }} ng-click="toggle2Smart(Task)" className="ng-scope">
@@ -439,47 +389,137 @@ function Portfolio({ID}:any) {
 
                                                     </a>
                                                 </div>
+                                                <div className='accordion-content'>
+                                                {item.showk &&
+                                                                           
+                                                                           <ul className="list-unstyled mb-0 fortablee" style={{ fontWeight: "normal" }}>
+                                                                           {myarray1.length!=0?myarray1.map((item: any)=>
+                                                                               
+                                                                                <li
+                                                                                   className="SiteCompositionlist for-lis">
+                                                                                   <div className="SiteCompositionlist-SiteImage" style={{width:"10%"}}>
+                                                                                       <img style={{ width: "22px" }} src={item.SiteImages} data-themekey="#" />
+                                                                                   </div>
+                                                                                   <div style={{width:"15%"}} className="SiteCompositionlist-ClienTimeDescription">
+                                                                                       {/* {{item.ClienTimeDescription.substring(0,2)}}% */}
+                                                                                       {/* {data.map(item =><i>{item.ClienTimeDescription.substring(0,2)}%</i>)} */}
+                                                                                       {(item.ClienTimeDescription!=undefined)&&
+                                                                                       <span className="ng-binding">
+                                                                                       {/* {item.ClienTimeDescription}% */}
+                                                                                                 
+                                                                                                   {parseInt(item.ClienTimeDescription)}%
+                                                                                       
+                                                                                       </span>
+                                                                                }
+                                                                                   </div>
+                                                                                  {item.Title=='EPS' &&
+                                                                                   <div ng-show="item.Title=='EPS'"
+                                                                                       className="SiteCompositionlist-ClientTitle">
+                                                                                           {myarray2.length!=0? myarray2.map((client: any)=>{
+                                                                                                       return( 
+                                                                                       <div className="Members-Item">
+                                                                                     
+                                                                                           <div ng-show="client.siteName=='EPS'"
+                                                                                               className="user-Member-img"
+                                                                                               ng-repeat="client in Task.ClientCategory.results">
+                                                                                                    {(client.Title=="Kontakt Verwaltung" ||client.Title==" Steuerungsbericht der Direktion"||client.Title== "Shareweb Maintenance"||client.Title== "Newsletter Einbindung"||client.Title=="PSE-Partnerschaften")  &&
+                                                                                               <span> 
+                                                                                                  
+                                                                                                   {client.Title} 
+                                                                                              
+                                                                                                   </span>
+                                                                                                   }
+                                                                                           </div>
+                                                                                       </div>
+                                                                                   )
+                                                                               }):""} 
+                                                                                   </div>
+                                                                                   }
+                                                                                   {item.Title=='EI'&&
+                                                                                   <div ng-show="item.Title=='EI'"
+                                                                                       className="SiteCompositionlist-ClientTitle">
+                                                                                            { myarray2.length!=0?myarray2.map((client: any)=>{
+                                                                                               return(
+                                                                                       <div className="Members-Item">
+                                                                                           <div ng-show="client.siteName=='EI'"
+                                                                                               className="user-Member-img"
+                                                                                               ng-repeat="client in Task.ClientCategory.results">
+                                                                                                     {(client.Title=="Nutzer Verwaltung" ||client.Title== "Shareweb Maintenance"||client.Title== "EI fachspezifische Aufgaben"||client.Title== "EI Projekt-Übersicht"||client.Title=="Mithilfe Zugriffsrechte-Konzepts") &&
+                                                                                               <span> 
+                                                                                                  
+                                                                                                   {client.Title}
+                                                                                                    </span>
+                                                                                            }
+                                                                                           </div>
+                                                                                               
+                                                                                       </div>
+                                                                                          ) }):""} 
+                                                                                   </div>
+                                                                                   }
+                                                                               </li>
+                                                                           ):""}
+                                                                           </ul>
+                                                                      }
+                                                </div>
                                             </div>
                                         </div>
                                         :""}
+                                        
                                     </div>
+                                    )}
+                                    
                                     {/*  Short Description */}
                                     {data.map(item =>
-                                    <div className="col-sm-8 pad0 teamdashboard_col-sm-12 ng-scope">
+                                    <div className="col-sm-8 mt-10 pad0 teamdashboard_col-sm-12 ng-scope">
+                                         
                                         {item.Short_x0020_Description_x0020_On !== null &&
+                                         
+                                         
                                         <div className="panel panel-default" id="t_draggable1">
                                             <div className="panel-heading">
-                                               
+                                           
                                                     <h3 className="panel-title">
-                                                        
+                                                    <span className="accordian-header" onClick={() => handleOpen(item)}>
                                                             <span>
+                                                            <a className='hreflink'
+                                                  title="Tap to expand the childs">
+                                                  <span className="sign">{item.show ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                      : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />} </span>
+                                                      </a>
                                                                 <label htmlFor="identifier-3" className="no-padding">
                                                                     Short
                                                                     Description
                                                                 </label>
-                                                                <span className="pull-left mr-5">
-                                                                    <span className="accordian-header" onClick={() => handleOpen(item)}>
-                                                                        <a className='hreflink'
-                                                                            title="Tap to expand the childs">
-                                                                            <span className="sign">{item.show ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                                : <div style={{ display: "inline" }}>
-                                                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
-                                                                                    <div className="boxbdrdesign" id="testDiv1">
-                                                                                        {/* dangerouslySetInnerHTML={{__html: item.Short_x0020_Description_x0020_On}} */}
-                                                                                    <span className="ng-binding"> {data.map(item => <a>{item.Short_x0020_Description_x0020_On}</a>)} </span>
-                                                                                    </div>
-                                                                                </div>}
-                                                                            </span>
-                                                                        </a>
-                                                                    </span>
+                                                                
                                                                 </span>
-                                                            </span></h3>
-                                               
+                                                           
+                                                            </span>       
+                                                            </h3>
+                                                               
                                             </div>
+                                            <div className="accordian-content">
+                                                                 
+                                                                 {item.show &&
+                                                                     <div className="boxbdrdesign" id="testDiv1">
+                                                                         {/* dangerouslySetInnerHTML={{__html: item.Short_x0020_Description_x0020_On}} */}
+                                                                         {data.map(item =>
+                                                                     <span className="ng-binding" dangerouslySetInnerHTML={{__html: item.Short_x0020_Description_x0020_On}}>
+                                                                          {/* {data.map(item => <a>{item.Short_x0020_Description_x0020_On}</a>)}  */}
+                                                                          </span>)}
+                                                                     </div>
+                                                                     }
+                                                                 
+                                                            
+                                                     </div>
+                                           
                                         </div>
+                                        
+                                       
                                         }
-                                    </div>
-                                     )}
+                                        
+                                        </div>
+                                        )}
+                                    
                                     {/* Background */}
                                     {data.map(item =>
                                     <div className="col-sm-8 pad0 teamdashboard_col-sm-12 ng-scope">
@@ -488,33 +528,41 @@ function Portfolio({ID}:any) {
                                             <div className="panel-heading">
                                                 
                                                     <h3 className="panel-title">
-                                                       
+                                                    <span className="accordian-header" onClick={() => handleOpen1(item)}>
                                                             <span>
+                                                                
+                                                            <a className='hreflink'
+                                                  title="Tap to expand the childs">
+                                                  <span className="sign">{item.showl ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                      : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />} </span>
+                                                      </a>
                                                                 <label htmlFor="identifier-3" className="no-padding ng-binding" ng-bind-html="GetColumnDetails('Background') | trustedHTML">Background</label>
-                                                                <span className="pull-left">
-                                                                    <span className="accordian-header" onClick={() => handleOpen1(item)}>
-                                                                        <a className='hreflink'
-                                                                            title="Tap to expand the childs">
-                                                                            <span className="sign">{item.showl ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                                : <div style={{ display: "inline" }}>
-                                                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
-                                                                                    <div className="boxbdrdesign" id="testDiv1">
-                                                                                    <span className="ng-binding" >{data.map(item =>  <a>{item.Background}</a>)}</span>
-                                                                                    </div>
-                                                                                </div>}
+                                                                
                                                                             </span>
-                                                                        </a>
-                                                                    </span>
-                                                                </span>
-                                                            </span>
+                                                                            </span>
+                                                                           
+                                                                      
+                                                               
                                                       
                                                     </h3>
                                                
                                             </div>
+                                            <div className="accordian-content">
+                                                                   
+                                                                   {item.showl &&
+                                                                           <div className="boxbdrdesign" id="testDiv1">
+                                                                           <span className="ng-binding" >{data.map(item =>  <a>{item.Background}</a>)}</span>
+                                                                           </div>
+                                                                           }
+                                                                      
+                                                                   </div>
                                         </div>
                                           }
+                                          
                                     </div>
-                                     )}
+                                    
+                                    )}
+                                     
                                     {/* Idea */}
                                     {data.map(item =>
                                     <div className="col-sm-8 pad0 teamdashboard_col-sm-12 ng-scope">
@@ -523,35 +571,36 @@ function Portfolio({ID}:any) {
                                             <div className="panel-heading">
                                                 
                                                     <h3 className="panel-title">
-                                                        
+                                                    <span className="accordian-header" onClick={() => handleOpen2(item)}>
                                                             <span>
+                                                                
+                                                            <a className='hreflink'
+                                                  title="Tap to expand the childs">
+                                                  <span className="sign">{item.shows ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                      : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />} </span>
+                                                      </a>
                                                                 <label htmlFor="identifier-3" className="no-padding ng-binding" ng-bind-html="GetColumnDetails('Idea') | trustedHTML">Idea</label>
-                                                                <span className="pull-left">
-                                                                    <span className="accordian-header" onClick={() => handleOpen2(item)}>
-                                                                        <a className='hreflink'
-                                                                            title="Tap to expand the childs">
-                                                                            <span className="sign">{item.shows ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                                : <div style={{ display: "inline" }}>
-                                                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
-                                                                                    <div className="boxbdrdesign" id="testDiv1">
-                                                                                   
-                                                                                   <span className="ng-binding" > {data.map(item =><a>{item.Idea}</a>)}  </span>
-                                                                                   {/* dangerouslySetInnerHTML={{__html: item.Idea}} */}
-                                                                                    </div>
-                                                                                </div>}
-                                                                            </span>
-                                                                        </a>
-                                                                    </span>
+                                                              
+                                                                
                                                                 </span>
                                                             </span>
                                                        
                                                     </h3>
                                                 
                                             </div>
+                                            <div className="accordian-content">
+                                                                   
+                                                                   {item.shows &&
+                                                                           <div className="boxbdrdesign" id="testDiv1">
+                                                                           <span className="ng-binding" >{data.map(item =>  <a>{item.Idea}</a>)}</span>
+                                                                           </div>
+                                                                           }
+                                                                      
+                                                                   </div>
                                         </div>
-                                         }
-                                    </div>
-                                    )}
+                                        }
+                                        
+                                    
                                 {/* Value Added */}
 
                                   
@@ -562,30 +611,30 @@ function Portfolio({ID}:any) {
                                             <div className="panel-heading">
                                                
                                                     <h3 className="panel-title">
-                                                        
+                                                    <span className="accordian-header" onClick={() => handleOpen4(item)}>
                                                             <span>
+                                                            <a className='hreflink'
+                                                  title="Tap to expand the childs">
+                                                  <span className="sign">{item.showj ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                      : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />} </span>
+                                                      </a>
                                                                 <label htmlFor="identifier-3" className="no-padding">
                                                                 Value Added
                                                                 </label>
-                                                                <span className="pull-left mr-5">
-                                                                    <span className="accordian-header" onClick={() => handleOpen4(item)}>
-                                                                        <a className='hreflink'
-                                                                            title="Tap to expand the childs">
-                                                                            <span className="sign">{item.showj ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                                : <div style={{ display: "inline" }}>
-                                                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
-                                                                                    <div className="boxbdrdesign" id="testDiv1">
-                                                                                  
-                                                                                        <span className="ng-binding" > {data.map(item =><a>{item.ValueAdded}</a>)} </span> 
-                                                                                    </div>
-                                                                                </div>}
-                                                                            </span>
-                                                                        </a>
-                                                                    </span>
+                                                               
+                                                                        
                                                                 </span>
                                                             </span></h3>
                                                
                                             </div>
+                                            <div className="accordion-content">
+                                                                {item.showj &&
+                                                                                    <div className="boxbdrdesign" id="testDiv1">
+                                                                                  
+                                                                                        <span className="ng-binding" > {data.map(item =><a>{item.ValueAdded}</a>)} </span> 
+                                                                                    </div>
+}
+                                                                            </div>
                                         </div>
                                         }
                                     </div>
@@ -601,37 +650,40 @@ function Portfolio({ID}:any) {
                                             <div className="panel-heading">
                                                
                                                     <h3 className="panel-title">
-                                                        
+                                                    <span className="accordian-header" onClick={() => handleOpen5(item)}>
                                                             <span>
+                                                            <a className='hreflink'
+                                                  title="Tap to expand the childs">
+                                                  <span className="sign">{item.showm ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
+                                                      : <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />} </span>
+                                                      </a>
                                                                 <label htmlFor="identifier-3" className="no-padding">
                                                                 Deliverables
                                                                 </label>
-                                                                <span className="pull-left mr-5">
-                                                                    <span className="accordian-header" onClick={() => handleOpen5(item)}>
-                                                                        <a className='hreflink'
-                                                                            title="Tap to expand the childs">
-                                                                            <span className="sign">{item.showm ? <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/right-list-icon.png" />
-                                                                                : <div style={{ display: "inline" }}>
-                                                                                    <img src="https://hhhhteams.sharepoint.com/sites/HHHH/SP/SiteCollectionImages/ICONS/24/list-icon.png" />
-                                                                                    <div className="boxbdrdesign" id="testDiv1">
-                                                                                    {data.map(item => 
-                                                                                        <span className="ng-binding" dangerouslySetInnerHTML={{__html: item.Deliverables}}></span>)}
-                                                                                    </div>
-                                                                                </div>}
-                                                                            </span>
-                                                                        </a>
-                                                                    </span>
-                                                                </span>
+                                                                
+                                                                       
+                                                                
+                                                            </span>
                                                             </span></h3>
                                                
                                             </div>
+                                            <div className="accordion-content">
+                                                                {item.showm &&
+                                                                                    <div className="boxbdrdesign" id="testDiv1">
+                                                                                    {data.map(item => 
+                                                                                        <span className="ng-binding" dangerouslySetInnerHTML={{__html: item.Deliverables}}></span>)}
+                                                                                    </div>}
+                                                                                
+                                                                            </div>
                                         </div>
                                         }
                                     </div>
                                      )}
 
                                 </div>
+                                )}
                             </div>
+                        </div>
                         </div>
                         <div className='col-sm-3 padL-25 mt60' >
                             <div className="panel panel-default">
@@ -671,6 +723,7 @@ function Portfolio({ID}:any) {
                                 </div>
                             </div>
                             {/* Main Folder */}
+                            
                             <div className="panel panel-default displayhide mt-25 ng-scope" ng-show="Folders!=undefined" ng-if="isOwner==true">
                                 <div className="panel-heading" title="Main Folder">
                                     <label className="full_width blue-clr">
@@ -685,16 +738,19 @@ function Portfolio({ID}:any) {
                                 <div className="panel-body">
                                     <div style={{ width: "100%" }} className="panel1 panel-default">
                                         <div className="col-sm-12 padL-0 mb-10">
+                                        {data.map(item =>
                                             <div className="col-sm-12 pad0">
                                                 <img ng-src="/_layouts/15/images/folder.gif?rev=23" data-themekey="#" src="/_layouts/15/images/folder.gif?rev=23" />
-                                                <a className="hreflink ng-binding" target="_blank" ng-href="/sites/HHHH/SP/Documents/COMPONENT-PORTFOLIO/Contact Database" href="/sites/HHHH/SP/Documents/COMPONENT-PORTFOLIO/Contact Database">
-                                                    Contact Database
+                                            <a className="hreflink ng-binding" target="_blank"  href={`/sites/HHHH/SP/Documents/COMPONENT-PORTFOLIO/${item.Title}`}>
+                                            {item.Title}
                                                 </a>
                                             </div>
+)}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             {/* Comment */}
                             <div className="panel panel-default mt-25">
                                 <div className="panel-heading">
@@ -733,39 +789,16 @@ function Portfolio({ID}:any) {
                                     </div>
                                     <div className="RecipientsCommentsField ">
                                         <textarea style={{ height: "76px", marginTop: "10px" }} className="form-control ui-autocomplete-input ng-pristine ng-untouched ng-valid ng-empty" placeholder="Enter your comments here"  ></textarea>
-                                        <p className="ng-hide">
+                                        {/* <p className="ng-hide">
                                             <i className="fa fa-exclamation-circle" aria-hidden="true"></i>
                                             Comment shouldn't be empty
-                                        </p>
+                                        </p> */}
                                         <button title="Post comment" type="button" className="btn btn-primary pull-right mt-5 mb-5">
                                             Post
                                         </button>
                                     </div>
                                     <div className="clearfix"></div>
-                                    <div className="commentMedia">
-                                        <div className="card" >
-                                            <ul className="list-unstyled">
-                                            </ul>
-                                            <div ng-show="AllCommentDetails.Comments.length>3" className="MoreComments ng-hide">
-                                                <a className="MoreComments ng-binding ng-hide" title="Click to Reply" >
-                                                    All
-                                                    Comments(0)
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="commentMedia">
-                                        <div className="card ng-hide" >
-                                            <ul className="list-unstyled">
-                                            </ul>
-                                        </div>
-                                        <div className="MoreComments ng-hide">
-                                            <a className="MoreComments ng-binding" title="Click to Reply" ng-click="EditDiscussion(AllCommentDetails)">
-                                                All
-                                                Comments(0)
-                                            </a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -775,11 +808,12 @@ function Portfolio({ID}:any) {
                     <div className="container-fluid">
                         <section className="TableSection">
                             <div className="container">
-                            {data.map(item => (
-                                <Groupbyt  title={item.Title} level={item.PortfolioLevel}/>))}
-                                {/* {data.map(item => (
+                            {/* {data.map(item => (
+                                <Groupbyt  title={item.Title} level={item.PortfolioLevel}/>))} */}
+                                {/* <Groupby/> */}
+                                {data.map(item => (
                                 <Groupby title={item.Title} level={item.PortfolioLevel}/>
-                                ))} */}
+                                ))}
                             </div>
 
                         </section>

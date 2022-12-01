@@ -36,7 +36,7 @@ function App() {
   <option value="Relevant" >(2) to be verified</option>
   <option value="Featured">(1) Archieve</option>
   <option value="Key">(0) No Show</option>
-</select>
+</select> 
 </span>
 <span className="margin">
         <strong >Priority</strong>

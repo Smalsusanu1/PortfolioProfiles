@@ -3,7 +3,7 @@
   "solution": {
     "name": "portfolio-profiles-client-side-solution",
     "id": "7de6f1e2-47b7-4b5b-a0d6-b9e1faac5d11",
-    "version": "1.3.2.8",
+    "version": "1.3.3.8",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,

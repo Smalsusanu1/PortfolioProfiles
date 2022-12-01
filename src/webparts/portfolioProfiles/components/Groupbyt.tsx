@@ -4,10 +4,11 @@ import * as Moment from 'moment';
 import './PopupOfdata/TestWithDiff/foundation.scss';
 import { Modal } from 'office-ui-fabric-react';
 //import "bootstrap/dist/css/bootstrap.min.css";
-import { FaAngleDown, FaAngleUp, FaPrint, FaFileExcel, FaPaintBrush, FaEdit, FaSearch } from 'react-icons/fa';
+import { FaAngleDown, FaAngleUp, FaPrint, FaFileExcel, FaPaintBrush, FaEdit, FaSearch,FaFilter, FaRegTimesCircle, FaRegCalendarAlt } from 'react-icons/fa';
 import { MdAdd } from 'react-icons/Md';
 import Tooltip from './popup';
 import Fuse from 'fuse.js'
+
 // import { CSVLink } from "react-csv";
 //import SmartFilter from './SmartFilter';
 
@@ -34,6 +35,12 @@ function Groupby(props:any) {
     const [table, setTable] = React.useState(data);
     const [Task, setTask] = React.useState([])
     const [modalIsOpen, setModalIsOpen] = React.useState(false);
+    const [SmartmodalIsOpen, setSmartModalIsOpen] = React.useState(false);
+    const [CreatedmodalIsOpen, setCreatedmodalIsOpen] = React.useState(false);
+    const [DuemodalIsOpen, setDuemodalIsOpen] = React.useState(false);
+    const [TeamMembermodalIsOpen, setTeamMembermodalIsOpen] = React.useState(false);
+    const [ItemRankmodalIsOpen, setItemRankmodalIsOpen] = React.useState(false);
+    const [StatusmodalIsOpen, setStatusmodalIsOpen] = React.useState(false);
     const [Editpopup, setEditpopup] = React.useState(false);
     const [addModalOpen, setAddModalOpen] = React.useState(false);
     const [showItem, setshowItem] = React.useState(false);
@@ -144,6 +151,50 @@ function Groupby(props:any) {
         setModalIsOpen(true)
     }
 
+    const setModalSmartIsOpenToTrue = () => {
+        setSmartModalIsOpen(true)
+    }
+    const setModalSmartIsOpenToFalse = () => {
+        setSmartModalIsOpen(false)
+    }
+    const setCreatedmodalIsOpenToTrue = () => {
+        setCreatedmodalIsOpen(true)
+    }
+    const setCreatedmodalIsOpenToFalse = () => {
+        setCreatedmodalIsOpen(false)
+    }
+    const setDuemodalIsOpenToTrue = () => {
+        setDuemodalIsOpen(true)
+    }
+    const setDuemodalIsOpenToFalse = () => {
+        setDuemodalIsOpen(false)
+    }
+
+    const setTeamMembermodalIsOpenToTrue = () => {
+        setTeamMembermodalIsOpen(true)
+    }
+    const setTeamMembermodalIsOpenToFalse = () => {
+        setTeamMembermodalIsOpen(false)
+    }
+
+    const setItemRankmodalIsOpenToTrue = () => {
+        setItemRankmodalIsOpen(true)
+    }
+    const setItemRankmodalIsOpenToFalse = () => {
+        setItemRankmodalIsOpen(false)
+    }
+
+    const setStatusmodalIsOpenToTrue = () => {
+        setStatusmodalIsOpen(true)
+    }
+    const setStatusmodalIsOpenToFalse = () => {
+        setStatusmodalIsOpen(false)
+    }
+
+
+
+   
+   
 
     const sortBy = () => {
 
@@ -925,7 +976,378 @@ setData(displayedContacts)
                 </div>
             </Modal>
             {/* -----------------------------------------end-------------------------------------------------------------------------------------------------------------------------------------- */}
+                 {/* Smart Time Popup */}
+                 <Modal
+                isOpen={SmartmodalIsOpen}
+                onDismiss={setModalSmartIsOpenToFalse}
+                isBlocking={true}
+                isModeless={true}
+                
+                >
+               
+                    <span ng-if="SmartTimeflag">
+                                            <div id="myDropdown1" className="col-sm-12 pad0 dropdown-content">
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Smart Time <span title="Close popup" className="pull-right hreflink"
+                                                                      onClick={setModalSmartIsOpenToFalse}>
+                                                        <i className="fa fa-times-circle"  ><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-md-12 mb-10 mt-10">
+                                                    <select className="form-control" ng-change="valuechange(ValueTitle);"
+                                                            ng-model="ValueTitle">
+                                                        <option value="">Select</option>
+                                                        <option value="Equal to">Equal to</option>
+                                                        <option value="Greater than">Greater than</option>
+                                                        <option value="Less than">Less than</option>
+                                                        <option value="Not equal to">Not equal to</option>
+                                                    </select>
+                                                </div>
+                                                <div className="col-md-12 mb-10 mt-10">
+                                                    <input type="date" 
+                                                           ng-change="clickInteger(Item3)" className="form-control full-width"
+                                                           id="txtSmartTime" ng-model="Item3" />
+                                                </div>
+                                                <div className="col-md-12 padL-0 text-center PadR0 mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('SmartTime')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('SmartTime')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </span>
+                
+            </Modal>
+
+            {/* Smart Time popup end here */}
+
+                 {/* Created Date Popup */}
+                 <Modal
+                isOpen={CreatedmodalIsOpen}
+                onDismiss={setModalSmartIsOpenToFalse}
+                isBlocking={false}
+                isModeless={true} >
+                <div ng-if="CreatedDateflag">
+                                            <div id="myDropdown4" className="dropdown-content">
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Created Date <span title="Close popup" className="pull-right hreflink"
+                                                                       ng-click="cancelColumnFilter()" onClick={setCreatedmodalIsOpenToFalse}>
+                                                        <i className="fa fa-times-circle" aria-hidden="true"><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-md-12 mb-10 mt-10">
+                                                    <select id="selectCreatedValue" className="form-control"
+                                                            ng-change="valuechange1(ValueTitle1);" ng-model="ValueTitle1">
+                                                        <option value="">Select</option>
+                                                        <option value="Equal to">Equal to</option>
+                                                        <option value="Greater than">Greater than</option>
+                                                        <option value="Less than">Less than</option>
+                                                        <option value="Not equal to">Not equal to</option>
+                                                        <option value="In Between">In Between</option>
+                                                        <option value="Presets">Presets</option>
+                                                    </select>
+                                                </div>
+                                               
+                                                <div ng-show="ValueTitle1!='Presets'"
+                                                     className="col-md-12 mb-10 mt-10 has-feedback has-feedback">
+                                                    <input type="date" placeholder="dd/mm/yyyy"
+                                                           className="form-control date-picker" id="txtDate4"
+                                                           ng-model="CreatedDateValue" />
+                                                    <i className="fa fa-calendar form-control-feedback mt-10"
+                                                      style={{marginRight:"10px"}}></i>
+                                                </div>
+                                               
+                                                <div className="col-md-12 text-center PadR0 mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('CreatedDate')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('CreatedDate')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+             
+                
+            </Modal>
+
+            {/* Created Date popup end here */}
+
+
+                {/* Due Date Popup */}
+                <Modal
+                isOpen={DuemodalIsOpen}
+                onDismiss={setDuemodalIsOpenToFalse}
+                isBlocking={false} 
+                isModeless={true}
+                >
+                <div ng-if="CreatedDateflag">
+                                            <div id="myDropdown4" className="dropdown-content">
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Due Date <span title="Close popup" className="pull-right hreflink"
+                                                                       ng-click="cancelColumnFilter()" onClick={setDuemodalIsOpenToFalse}>
+                                                        <i className="fa fa-times-circle" aria-hidden="true"><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-md-12 mb-10 mt-10">
+                                                    <select id="selectCreatedValue" className="form-control"
+                                                            ng-change="valuechange1(ValueTitle1);" ng-model="ValueTitle1">
+                                                        <option value="">Select</option>
+                                                        <option value="Equal to">Equal to</option>
+                                                        <option value="Greater than">Greater than</option>
+                                                        <option value="Less than">Less than</option>
+                                                        <option value="Not equal to">Not equal to</option>
+                                                        <option value="In Between">In Between</option>
+                                                        <option value="Presets">Presets</option>
+                                                    </select>
+                                                </div>
+                                               
+                                                <div ng-show="ValueTitle1!='Presets'"
+                                                     className="col-md-12 mb-10 mt-10 has-feedback has-feedback">
+                                                    <input type="date" placeholder="dd/mm/yyyy"
+                                                           className="form-control date-picker" id="txtDate4"
+                                                           ng-model="CreatedDateValue" />
+                                                    <i className="fa fa-calendar form-control-feedback mt-10"
+                                                      style={{marginRight:"10px"}}></i>
+                                                </div>
+                                               
+                                                <div className="col-md-12 text-center PadR0 mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('CreatedDate')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('CreatedDate')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+             
+                
+            </Modal>
+
+            {/* Due Date popup end here */}
+
+    {/* Team Member Popup */}
+    <Modal
+                isOpen={TeamMembermodalIsOpen}
+                onDismiss={setTeamMembermodalIsOpenToFalse}
+                isBlocking={false}
+                isModeless={true} >
+             <span ng-if="Responsibilityflag">
+                                            <div id="myDropdown1" className="dropdown-content">
+                                              
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Team Members <span title="Close popup" className="pull-right hreflink"
+                                                                       ng-click="cancelColumnFilter()" onClick={setTeamMembermodalIsOpenToFalse}>
+                                                        <i className="fa fa-times-circle" aria-hidden="true"><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-sm-12 padL-0 ml5">
+                                                    <div className="checkbox mb0 ml15">
+                                                        <input ng-model="selectAll" type="checkbox"
+                                                               name="Responsibility1"
+                                                               ng-click="SelectAll(selectAll,'Team Members')"/><span className=" f-500">
+                                                            Select All
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-12 PadR0 ml5">
+                                                    <ul ng-if="filterItem.TaxType=='Team Members'" className=""
+                                                        ng-repeat="filterItem in AllItems" style={{maxWidth: "96%"}}>
+                                                        <li className="for-lis padding-0">
+                                                            <div className="" style={{width: "8%"}}>
+                                                                <span className="hreflink "
+                                                                      ng-show="filterItem.childs.length>0 && !filterItem.expanded"
+                                                                      ng-click="loadMoreFiltersColumn(filterItem);">
+                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/right-list-icon.png"/>
+                                                                </span>
+                                                                <span className="hreflink "
+                                                                      ng-show="filterItem.childs.length>0 && filterItem.expanded"
+                                                                      ng-click="loadMoreFiltersColumn(filterItem);">
+                                                                    <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/list-icon.png"/>
+                                                                </span>
+                                                            </div>
+                                                            <div className="" style={{width: "8%"}}>
+                                                                <input type="checkbox"
+                                                                       className="icon-input mt--2 ml0"
+                                                                       ng-model="filterItem.Selected"
+                                                                       ng-click="SelectFilterFunction(filterItem.TaxType,AllItems)" />
+                                                            </div>
+                                                            <div className="no-padding" style={{width: "84%"}}>
+                                                                {/* {{filterItem.Title}} */}
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <ul id="columnId_{{filterItem.Id}}"
+                                                                ng-show="filterItem.childs.length>0&&filterItem.expanded"
+                                                                className="ml5" style={{maxWidth:"95%"}}>
+                                                                <li className="for-lis ml5 padding-0"
+                                                                    ng-repeat="child1 in filterItem.childs">
+                                                                    <div className="" style={{width: "8%"}}>
+                                                                        <span className="hreflink "
+                                                                              ng-show="child1.childs.length>0 && !child1.expanded"
+                                                                              ng-click="loadMoreFiltersColumn(child1);">
+                                                                            <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/right-list-icon.png"/>
+                                                                        </span>
+                                                                        <span className="hreflink "
+                                                                              ng-show="child1.childs.length>0 && child1.expanded"
+                                                                              ng-click="loadMoreFiltersColumn(child1);">
+                                                                            <img ng-src="{{baseUrl}}/SiteCollectionImages/ICONS/32/list-icon.png"/>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div className="" style={{width: "8%"}}>
+                                                                        <input type="checkbox" className="icon-input mt--2 ml0"
+                                                                               ng-model="child1.Selected"
+                                                                               ng-click="SelectFilterFunction(child1.TaxType,filterItem.childs)" />
+                                                                    </div>
+                                                                    <div className="no-padding" style={{width: "84%"}}>
+                                                                    child1
+                                                                        {/* {{child1.Title}} */}
+                                                                    </div>
+                                                                </li>
+
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div className="col-md-12 text-center padL-0 PadR0 mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('Team Members')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('Team Members')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </span>
+             
+                
+            </Modal>
+
+            {/* Team Member popup end here */}
+ {/* Item Rank Popup */}
+ <Modal
+                isOpen={ItemRankmodalIsOpen}
+                onDismiss={setItemRankmodalIsOpenToFalse}
+                isBlocking={false} 
+                isModeless={true}>
+                       <span ng-if="ItemRankflag">
+                                            <div id="myDropdown1" className="dropdown-content">
+                                                
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Item Rank <span title="Close popup" className="pull-right hreflink"
+                                                                    ng-click="cancelColumnFilter()"onClick={setItemRankmodalIsOpenToFalse}>
+                                                                    <i className="fa fa-times-circle" aria-hidden="true"><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-sm-12 padL-0 ml5" >
+                                                    <div className="checkbox mb0 ml15">
+                                                        <input ng-model="selectAll" type="checkbox" name="ItemRank1"
+                                                               ng-click="SelectAll(selectAll,'ItemRank')"/><span className="f-500">Select All</span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-12 PadR0 ml5">
+                                                    <div className="col-sm-12 padL-0 PadR0 checkbox mb0 ml15"
+                                                         ng-if="obj.TaxType =='ItemRank'" ng-repeat="obj in AllItems">
+                                                        <input ng-model="obj.Selected" type="checkbox"
+                                                               name="ItemRank"/><span className="">
+                                                                {/* {{obj.Title}} */}
+                                                                </span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-12 padL-0 text-center PadR0 mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('ItemRank')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('ItemRank')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </span>
             
+             
+                
+            </Modal>
+
+            {/* Item Rank popup end here */}
+
+            
+            {/* Status Popup */}
+ <Modal
+                isOpen={StatusmodalIsOpen}
+                onDismiss={setStatusmodalIsOpenToFalse}
+                isBlocking={false}
+                isModeless={true}
+                >
+                      
+
+
+                       <span ng-if="PercentCompleteflag">
+                                            <div id="myDropdown1" className="dropdown-content">
+                                                
+                                                <h4 className="col-sm-12 siteColor quickheader">
+                                                    Status <span title="Close popup" className="pull-right hreflink"
+                                                                    onClick={setStatusmodalIsOpenToFalse}>
+                                                                    <i className="fa fa-times-circle" aria-hidden="true"><FaRegTimesCircle/></i>
+                                                    </span>
+                                                </h4>
+                                                <div className="col-sm-12 padL-0 ml5">
+                                                    <div className="checkbox mb0 ml15 f-500">
+                                                        <input ng-model="selectAll" type="checkbox"
+                                                               name="PercentComplete1"
+                                                               ng-click="SelectAll(selectAll,'PercentComplete')"/><span className="">
+                                                            Select All
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-sm-12 PadR0 ml5">
+                                                    <div className="col-sm-12 padL-0 PadR0 checkbox mb0 ml15"
+                                                         ng-if="obj.TaxType =='PercentComplete'"
+                                                         ng-repeat="obj in AllItems">
+                                                        <input ng-model="obj.Selected" type="checkbox"
+                                                               name="PercentComplete"/><span className="">
+                                                                {/* {{obj.Title}}% */}
+                                                                </span>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-12 padL-0 PadR0 text-center mb-10 mt-10">
+                                                    <button type="button" ng-click="FilterData('PercentComplete')"
+                                                            className="btn btn-primary">
+                                                        Apply
+                                                    </button>
+                                                    <button type="button" className="btn btn-default blocks"
+                                                            ng-click="Filtercancel('PercentComplete')">
+                                                        Clear
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </span>
+
+
+                                      
+            
+             
+                
+            </Modal>
+
+            {/* Status popup end here */}
+
+
+
+
        
             <section className="TableContentSection">
                 <div className="container-fluid">
@@ -996,11 +1418,13 @@ setData(displayedContacts)
                                                         <th style={{ width: "2%" }}>
                                                             <div></div>
                                                         </th>
-
+                                                        <th style={{ width: "2%" }}>
+                                                            <div></div>
+                                                        </th>
                                                         {/* <th style={{ width: "2%" }}></th> */}
                                                         <th style={{ width: "7%" }}>
-                                                            <div style={{ width: "19%" }} className="smart-relative">
-                                                                <input type="search" placeholder="TASK ID" className="full_width searchbox_height" onChange={(e)=>SearchVale(e,"TaskId")} />
+                                                            <div style={{ width: "6%" }} className="smart-relative">
+                                                                <input type="search" placeholder="TaskId" className="full_width searchbox_height" onChange={(e)=>SearchVale(e,"TaskId")} />
 
                                                                 <span className="sorticon">
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
@@ -1010,8 +1434,8 @@ setData(displayedContacts)
 
                                                             </div>
                                                         </th>
-                                                        <th style={{ width: "20%" }}>
-                                                            <div style={{ width: "19%" }} className="smart-relative">
+                                                        <th style={{ width: "30%" }}>
+                                                            <div style={{ width: "30%" }} className="smart-relative">
                                                                 <input type="search" placeholder="Title" className="full_width searchbox_height" onChange={(e)=>SearchAll(e)} />
 
                                                                 <span className="sorticon">
@@ -1021,8 +1445,8 @@ setData(displayedContacts)
 
                                                             </div>
                                                         </th>
-                                                        <th style={{ width: "18%" }}>
-                                                            <div style={{ width: "17%" }} className="smart-relative">
+                                                        <th style={{ width: "12%" }}>
+                                                            <div style={{ width: "12%" }} className="smart-relative">
                                                                 <input id="searchClientCategory" type="search" placeholder="Client Category"
                                                                     title="Client Category" className="full_width searchbox_height"
                                                                     onChange={(e)=>handleChange(e,"ClientCategory")}  />
@@ -1032,8 +1456,55 @@ setData(displayedContacts)
                                                                 </span>
                                                             </div>
                                                         </th>
-                                                        <th style={{ width: "20%" }}>
-                                                            <div style={{ width: "19%" }} className="smart-relative">
+                                                        <th style={{ width: "7%" }}>
+                                                            <div style={{ width: "8%" }} className="smart-relative">
+                                                                <input id="searchClientCategory" type="search" placeholder="%"
+                                                                    title="Client Category" className="full_width searchbox_height"
+                                                                    onChange={(e)=>handleChange(e,"ClientCategory")}  />
+                                                                <span className="sorticon">
+                                                                    <span className="up" onClick={sortBy}>< FaAngleUp /></span>
+                                                                    <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
+                                                                </span>
+                                                                <span className="dropdown filer-icons">
+                                                                <span className="filter-iconfil"
+                                                //  href="#myDropdown1"
+                                                onClick={setStatusmodalIsOpenToTrue}
+                                                //   ng-click="myFunction('myDropdown1','PercentComplete')"
+                                                  >
+                                                    <i ><FaFilter onClick={setStatusmodalIsOpenToTrue}/></i>
+                                                    {/* <i title="Site" className="fa fa-filter hreflink " ng-show="StatusFilterGrey"></i>
+                                                    <i title="Site" className="fa fa-filter hreflink  glyphicon_active ng-hide" ng-show="!StatusFilterGrey"></i> */}
+                                                </span></span>
+                                                         
+                                                           
+                                                                
+                                                            </div>
+                                                        </th>
+                                                        <th style={{ width: "13%" }}>
+                                                            <div style={{ width: "12%" }} className="smart-relative">
+                                                                <input id="searchClientCategory" type="search" placeholder="ItemRank"
+                                                                    title="Client Category" className="full_width searchbox_height"
+                                                                    onChange={(e)=>handleChange(e,"ClientCategory")}  />
+                                                                <span className="sorticon">
+                                                                    <span className="up" onClick={sortBy}>< FaAngleUp /></span>
+                                                                    <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
+                                                                </span>
+                                                                <span className="dropdown filer-icons">
+                                                <span className="filter-iconfil"
+                                                //  href="#myDropdown1"
+                                                onClick={setItemRankmodalIsOpenToTrue}
+                                                //   ng-click="myFunction('myDropdown1','PercentComplete')"
+                                                  >
+                                                    <i ><FaFilter onClick={setItemRankmodalIsOpenToTrue}/></i>
+                                                    {/* <i title="Site" className="fa fa-filter hreflink " ng-show="StatusFilterGrey"></i>
+                                                    <i title="Site" className="fa fa-filter hreflink  glyphicon_active ng-hide" ng-show="!StatusFilterGrey"></i> */}
+                                                </span>
+                                            </span>
+
+                                                            </div>
+                                                        </th>
+                                                        <th style={{ width: "12%" }}>
+                                                            <div style={{ width: "11%" }} className="smart-relative">
                                                                 <input id="searchClientCategory" type="search" placeholder="Team"
                                                                     title="Client Category" className="full_width searchbox_height"
                                                                     onChange={(e)=>handleChange(e,"Team")}/>
@@ -1041,24 +1512,48 @@ setData(displayedContacts)
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
+                                                                <span className="dropdown filer-icons">
+                                                <span className="filter-iconfil"
+                                                //  href="#myDropdown1"
+                                                onClick={setTeamMembermodalIsOpenToTrue}
+                                                //   ng-click="myFunction('myDropdown1','PercentComplete')"
+                                                  >
+                                                    <i ><FaFilter onClick={setTeamMembermodalIsOpenToTrue}/></i>
+                                                    {/* <i title="Site" className="fa fa-filter hreflink " ng-show="StatusFilterGrey"></i>
+                                                    <i title="Site" className="fa fa-filter hreflink  glyphicon_active ng-hide" ng-show="!StatusFilterGrey"></i> */}
+                                                </span>
+                                            </span>
 
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "10%" }}>
                                                             <div style={{ width: "9%" }} className="smart-relative">
-                                                                <input id="searchClientCategory" type="search" placeholder="Status"
+                                                                <input id="searchClientCategory" type="search" placeholder="Due Date"
                                                                     title="Client Category" className="full_width searchbox_height"
                                                                     onChange={(e)=>handleChange(e,"Status")} />
                                                                 <span className="sorticon">
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
+                                                                <span className="dropdown filer-icons">
+                                                <span className="filter-iconfil"
+                                                //  href="#myDropdown1"
+                                                onClick={setDuemodalIsOpenToTrue}
+                                                //   ng-click="myFunction('myDropdown1','PercentComplete')"
+                                                  >
+                                                    <i ><FaFilter onClick={setDuemodalIsOpenToTrue}/></i>
+                                                    {/* <i title="Site" className="fa fa-filter hreflink " ng-show="StatusFilterGrey"></i>
+                                                    <i title="Site" className="fa fa-filter hreflink  glyphicon_active ng-hide" ng-show="!StatusFilterGrey"></i> */}
+                                                </span>
+                                            </span>
+                                                        
+                                                              
 
                                                             </div>
                                                         </th>
                                                         <th style={{ width: "10%" }}>
                                                             <div style={{ width: "9%" }} className="smart-relative">
-                                                                <input id="searchClientCategory" type="search" placeholder="Item Rank"
+                                                                <input id="searchClientCategory" type="search" placeholder="Created Date"
                                                                     title="Client Category" className="full_width searchbox_height"
                                                                     onChange={(e)=>handleChange(e,"ItemRank")} />
                                                                 <span className="sorticon">
@@ -1067,18 +1562,32 @@ setData(displayedContacts)
                                                                 </span>
                                                             </div>
                                                         </th>
+                                                    
+                                                        
                                                         <th style={{ width: "10%" }}>
                                                             <div style={{ width: "9%" }} className="smart-relative">
-                                                                <input id="searchClientCategory" type="search" placeholder="Due"
+                                                                <input id="searchClientCategory" type="search" placeholder="Smart Time"
                                                                     title="Client Category" className="full_width searchbox_height"
                                                                     onChange={(e)=>handleChange(e,"Due")} />
                                                                 <span className="sorticon">
                                                                     <span className="up" onClick={sortBy}>< FaAngleUp /></span>
                                                                     <span className="down" onClick={sortByDng}>< FaAngleDown /></span>
                                                                 </span>
-
+                                                              
+                                                                <span className="dropdown filer-icons">
+                                                <span className="filter-iconfil"
+                                                //  href="#myDropdown1"
+                                                onClick={setModalSmartIsOpenToTrue}
+                                                //   ng-click="myFunction('myDropdown1','PercentComplete')"
+                                                  >
+                                                    <i ><FaFilter onClick={setModalSmartIsOpenToTrue}/></i>
+                                                    {/* <i title="Site" className="fa fa-filter hreflink " ng-show="StatusFilterGrey"></i>
+                                                    <i title="Site" className="fa fa-filter hreflink  glyphicon_active ng-hide" ng-show="!StatusFilterGrey"></i> */}
+                                                </span>
+                                            </span>
                                                             </div>
                                                         </th>
+                                                        
                                                         <th style={{ width: "3%" }}></th>
                                                         {/* <th style={{ width: "2%" }}></th>
                                                         <th style={{ width: "2%" }}></th>
@@ -1090,14 +1599,14 @@ setData(displayedContacts)
                                                         
                                                             return (
                                                                 <>
-                                                
-                                                                            {item.Child.map(function (childitem: any) {
+                                                                            
+                                                                            { item.Child.map(function (childitem: any) {
                                                                                 if (search == "" || childitem.Title.toLowerCase().includes(search.toLowerCase())) {
                                                                                 return (
 
                                                                                     <>
                                                                                         <tr >
-                                                                                            <td className="pad0" colSpan={9}>
+                                                                                            <td className="pad0" colSpan={10}>
                                                                                                 <table className="table" style={{ width: "100%" }}>
                                                                                                     <tr className="for-c02">
                                                                                                         <td style={{ width: "2%" }}>
@@ -1113,7 +1622,9 @@ setData(displayedContacts)
 
                                                                                                             </div>
                                                                                                         </td>
-                                                                                                        <td><input type="checkbox" id="Data" name="Myvalue" value="S"/></td>
+                                                                                                        <td style={{ width: "2%" }}>
+                                                                                                            <input type="checkbox" id="Data" name="Myvalue" value="S"/>
+                                                                                                        </td>
                                                                                                         {/* <td style={{ width: "2%" }}></td> */}
                                                                                                         <td style={{ width: "7%" }}>  <div className="d-flex">
                                                                                                             <span>
@@ -1128,7 +1639,7 @@ setData(displayedContacts)
                                                                                                         </div>
                                                                                                         </td>
 
-                                                                                                        <td style={{ width: "20%" }}>
+                                                                                                        <td style={{ width: "18%" }}>
                                                                                                             <a className="hreflink serviceColor_Active" target="_blank"
                                                                                                                 href={"https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=" + childitem.Id}
                                                                                                             >{childitem.Title}
@@ -1149,7 +1660,7 @@ setData(displayedContacts)
                                                                                                                 </span>
                                                                                                             }
                                                                                                         </td>
-                                                                                                        <td style={{ width: "18%" }}>
+                                                                                                        <td style={{ width: "30%" }}>
                                                                                                             <div>
                                                                                                                 {childitem.ClientCategory.map(function (client: { Title: string; }) {
                                                                                                                     return (
@@ -1171,11 +1682,15 @@ setData(displayedContacts)
                                                                                                                     </div>
                                                                                                                 )
                                                                                                             })}</div></td>
-                                                                                                        <td style={{ width: "10%" }}>{childitem.PercentComplete}</td>
-                                                                                                        <td style={{ width: "10%" }}>{childitem.ItemRank}</td>
+                                                                                                        <td style={{ width: "7%" }}>{childitem.PercentComplete}</td>
+                                                                                                        <td style={{ width: "13%" }}>{childitem.ItemRank}</td>
+                                                                                                        <td style={{ width: "12%" }}> Team</td>
                                                                                                         <td style={{ width: "10%" }}>{childitem.DueDate}</td>
+                                                                                                        <td style={{ width: "10%" }}>Created Date</td>
+                                                                                                        <td style={{ width: "10%" }}>Smart Time</td>
+                                                                                                        <td style={{ width: "3%" }}></td>
+                                                                                                        {/* <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td> */}
 
-                                                                                                        <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td>
                                                                                                     </tr>
                                                                                                 </table>
                                                                                             </td>
@@ -1183,7 +1698,7 @@ setData(displayedContacts)
 
                                                                                         {childitem.show && (
                                                                                             <>
-                                                                                                {childitem.Child.map(function (childinew: any) {
+                                                                                                {childitem.Child!=undefined&&childitem.Child.map(function (childinew: any) {
                                                                                                      if (nsearch == "" || childinew.Title.toLowerCase().includes(nsearch.toLowerCase())) {
                                                                                                     return (
                                                                                                         <tr >
@@ -1201,7 +1716,7 @@ setData(displayedContacts)
 
                                                                                                                     </div> */}
                                                                                                                         </td>
-
+                                                                                                                        <td style={{ width: "2%" }}></td>
 
                                                                                                                         <td style={{ width: "7%" }}> <div className="d-flex">
                                                                                                                             <span>
@@ -1216,7 +1731,7 @@ setData(displayedContacts)
                                                                                                                         </div>
                                                                                                                         </td>
 
-                                                                                                                        <td style={{ width: "20%" }}>
+                                                                                                                        <td style={{ width: "18%" }}>
 
                                                                                                                             <a className="hreflink serviceColor_Active" target="_blank"
                                                                                                                                 href={"https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=" + childinew.Id}
@@ -1260,11 +1775,15 @@ setData(displayedContacts)
                                                                                                                                     </span>
                                                                                                                                 )
                                                                                                                             })}</div></td>
-                                                                                                                        <td style={{ width: "10%" }}>{childinew.PercentComplete}</td>
-                                                                                                                        <td style={{ width: "10%" }}>{childinew.ItemRank}</td>
-                                                                                                                        <td style={{ width: "10%" }}>{childinew.DueDate}</td>
-
-                                                                                                                        <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td>
+                                                                                                                        <td style={{ width: "7%" }}>{childinew.PercentComplete}</td>
+                                                                                                                        <td style={{ width: "13%" }}>{childinew.ItemRank}</td>
+                                                                                                                        <td style={{ width: "12%" }}> Team</td>
+                                                                                                        <td style={{ width: "10%" }}>{childinew.DueDate}</td>
+                                                                                                        <td style={{ width: "10%" }}>Created Date</td>
+                                                                                                        <td style={{ width: "10%" }}>Smart Time</td>
+                                                                                                        <td style={{ width: "3%" }}></td>
+      
+                                                                                                                        {/* <td style={{ width: "3%" }}><a onClick={setModalIsOpenToTrue}><FaEdit /></a></td> */}
                                                                                                                     </tr>
                                                                                                                 </table>
                                                                                                             </td>
