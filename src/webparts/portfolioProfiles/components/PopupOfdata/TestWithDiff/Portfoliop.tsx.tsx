@@ -1,21 +1,16 @@
 import * as React from 'react';
 import * as $ from 'jquery';
 import '../TestWithDiff/foundation.scss';
-// import Tooltip from '../../popup';
 import './styles.css';
 import * as Moment from 'moment';
 import Tooltip from '../../popup';
 import "bootstrap/dist/css/bootstrap.min.css";
-// import Groupby from '../../GroupBys';
 import '../TestWithDiff/foundationmin.scss';
-import Groupby from '../../Groupbyt';
-// import Groupby from '../../GroupBy';
-// import Tooltip from '../popup';
-// import PopupOfdata from '../PopupOfdata';
-// import GetData from '../../GetCall';
-// import { NavItem } from 'react-bootstrap';
-// import Groupby from '../../GroupBys';
-// import Groupbyt from '../../Groupbyt';
+import ComponentTable from '../../componentTable';
+
+
+
+
 function Portfolio({ID}:any) {
     const [data, setTaskData] = React.useState([]);
     const [isActive, setIsActive] = React.useState(false);
@@ -340,7 +335,7 @@ function Portfolio({ID}:any) {
                                                     className="tlvalue impact-infoII ">
                                                         
                                                     <div className="hreflink block ng-binding">
-                                                        <a className="hreflink block ng-binding" target="_blank" href={`https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=${item.ServicePortfolio.Id}`}>{item.ServicePortfolio.Title}</a>
+                                                        <a className="hreflink block ng-binding" style={{border:"0px"}}target="_blank" href={`https://hhhhteams.sharepoint.com/sites/HHHH/SP/SitePages/Portfolio-Profile.aspx?taskId=${item.ServicePortfolio.Id}`}>{item.ServicePortfolio.Title}</a>
                                                     </div>
                                                    
                                                 </div>
@@ -600,11 +595,15 @@ function Portfolio({ID}:any) {
                                         </div>
                                         }
                                         
-                                    
+                     
+                                </div>
+                                )}
+
+                                               
                                 {/* Value Added */}
 
                                   
-                                   {data.map(item =>
+                                {data.map(item =>
                                     <div className="col-sm-8 pad0 teamdashboard_col-sm-12 ng-scope">
                                         {item.ValueAdded !== null &&
                                         <div className="panel panel-default" id="t_draggable1">
@@ -680,8 +679,6 @@ function Portfolio({ID}:any) {
                                     </div>
                                      )}
 
-                                </div>
-                                )}
                             </div>
                         </div>
                         </div>
@@ -812,7 +809,8 @@ function Portfolio({ID}:any) {
                                 <Groupbyt  title={item.Title} level={item.PortfolioLevel}/>))} */}
                                 {/* <Groupby/> */}
                                 {data.map(item => (
-                                <Groupby title={item.Title} level={item.PortfolioLevel}/>
+                                // <Groupby Id={item.Id} level={item.PortfolioLevel}/>
+                                <ComponentTable props={item.Title}/>
                                 ))}
                             </div>
 

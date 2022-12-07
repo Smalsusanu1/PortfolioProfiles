@@ -2,8 +2,6 @@ import * as React from 'react';
 // import styles from './PortfolioProfiles.module.scss';
 import { IPortfolioProfilesProps } from './IPortfolioProfilesProps';
 import { escape } from '@microsoft/sp-lodash-subset';
-import PopupOfdata from './PopupOfdata/PopupOfdata';
-import Portfolio from './PopupOfdata/TestWithDiff/Difff';
 // import Groupby from './GroupByz';
 import GetData from './GetCall';
 import MyTable from './Tailwindc';
@@ -13,6 +11,7 @@ import App from './PortfolioProfile/Arraypass';
 import SmartFilter from './PortfolioProfile/SmartFilter';
 import Groupby from './GroupBy';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Portfolio from './PopupOfdata/TestWithDiff/Portfoliop.tsx';
 export default class PortfolioProfiles extends React.Component<IPortfolioProfilesProps, {}> {
   public render(): React.ReactElement<IPortfolioProfilesProps> {
 

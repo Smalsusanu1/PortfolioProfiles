@@ -4,7 +4,8 @@ import Tab from "./Tab"
 import './styles.css';
 import SelectServices from './SelectServices/SelectServices';
 import SelectCategories from "./SelectCategories/SelectCategories";
-import Portfolio from './Difff';
+import Portfolio from './Portfoliop.tsx';
+
 function App() {
   return (
        
